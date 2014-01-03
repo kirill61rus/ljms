@@ -16,6 +16,12 @@ hr {
 label {
 	font-size: 11px;
 }
+h4 {
+	font-size: 24px;
+	font-weight: normal;
+	color: #8d000b;	
+	margin-bottom: 30px;
+}
 /* ----- Header ----- */
 #header {
 	position: relative;
@@ -127,6 +133,11 @@ label {
 	display: block;
 	border-left: 1px solid #999;
 	padding-left: 5px;
+}
+#base p {
+	margin-bottom: 10px;
+	font-size: 12px;
+	line-height: 18px;
 }
 
 /* ------ Footer ------- */

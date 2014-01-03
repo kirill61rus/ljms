@@ -2,6 +2,6 @@
 					<div class="content">
 						<div class="announce"></div>
 						<br/>
-						<img src="images/announce_img.gif"/>
+						<img src="<?=base_url('images/announce_img.gif')?>"/>
 					</div>
 				</div>
