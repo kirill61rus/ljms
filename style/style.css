@@ -1,0 +1,151 @@
+body {
+	background: #660000;
+	font-family: Tahoma,Arial,Helvetica;
+	font-size: 14px;
+	color: #333333;
+}
+#container {
+	width: 1000px;
+	margin: auto;
+}
+hr {
+	height: 1px;
+	border: none;
+	background: #000;
+}
+label {
+	font-size: 11px;
+}
+/* ----- Header ----- */
+#header {
+	position: relative;
+	height: 345px;
+	background: url("../images/main.jpg") no-repeat bottom;
+}
+#logo {
+	position: absolute;
+	top: 16px;
+	left: 1px;
+	background: url("../images/logo.jpg") no-repeat bottom;
+	width: 211px;
+	height: 200px;
+}
+#auth_area {
+	height: 90px;
+}
+.menu {
+	font-size: 0;
+	margin-left: 240px;
+	margin-top: 29px;
+}
+.menu li  {
+	display: inline-block;
+	border-left: 1px solid #FFF;
+	margin-right: 6px;
+	padding-left: 6px;
+}
+.menu li:first-child {
+	border-left: none;
+}
+.menu li a {
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 14px;
+	color: #FFF;
+	text-decoration: none;
+}
+.menu li a:hover {
+	color: #660000;
+}
+/* ------ Content ------- */
+.sidebar {
+	width: 243px;
+}
+.column {
+	float: left;
+}
+#base {
+	width: 514px;
+	background: url("../images/content_bg.jpg") no-repeat right bottom;	
+}
+#base .content {
+	padding: 10px 20px;
+}
+#content {
+	background: #FFF;
+}
+#content:after, .title:after, #base .content:after {
+	clear: both;
+	content: "";
+	display: table;
+}
+.sidebar.left {
+	min-height: 130px;
+	background: url("../images/sidebar_bg.jpg") no-repeat right;
+}
+.sidebar .content {
+	padding: 10px;
+}
+.sidebar .content {
+	padding: 10px 18px 10px 10px;
+}
+.sidebar select {
+	width: 100%;
+}
+.division {
+	background: url("../images/division.gif") no-repeat;
+	height: 24px;
+	width: 65px;
+}
+.welcome {
+	background: url("../images/welcome.gif") no-repeat;
+	height: 20px;
+	width: 220px;
+}
+.announce {
+	background: url("../images/announce.gif") no-repeat;
+	height: 21px;
+	width: 148px;
+}
+.item .img {
+	width: 15%;
+}
+.item .text {
+	width: 80%;
+	padding-left: 9px;
+	border-left: 1px solid #000;
+}
+.column.text a{
+	color: #c70000;
+	text-decoration: none;
+}
+.column.text a:hover{
+	text-decoration: underline;
+}
+.about {
+	margin-top: 50px;
+	display: block;
+	border-left: 1px solid #999;
+	padding-left: 5px;
+}
+
+/* ------ Footer ------- */
+#footer {
+	font-size: 12px;
+	overflow: auto;
+	height: 42px;
+	background: url("../images/footer_bg.jpg");
+}
+#footer .menu {
+	margin: 17px 0 0 10px;
+	position: absolute;
+}
+#footer .menu li a {
+	font-size: 12px;
+	font-weight: normal;
+}
+#footer p {
+	color: #FFF;
+	text-align: center;
+	margin-top: 17px;
+}

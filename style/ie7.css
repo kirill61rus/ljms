@@ -1,0 +1,7 @@
+#content, .menu li, #base .content {
+	zoom: 1;
+}
+
+.menu li{
+	display: inline;
+}
