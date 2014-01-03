@@ -2,6 +2,6 @@
 
 class Pages extends CI_Controller {
 	function about(){
-		$this->load->view('include/about');
+		$this->load->view('about');
 	}
 }
