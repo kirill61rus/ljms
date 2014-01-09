@@ -1,7 +1,7 @@
-#content, .menu li, #base .content {
+#content, .menu li, #base .content, .form-group {
 	zoom: 1;
 }
 
-.menu li{
+.menu li {
 	display: inline;
 }

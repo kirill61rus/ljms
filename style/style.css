@@ -22,6 +22,14 @@ h4 {
 	color: #8d000b;	
 	margin-bottom: 30px;
 }
+h5 {
+	font-family: Tahoma, Arial, Helvetica;
+	font-weight: bold;
+	font-size: 12px;
+}
+.text_center {
+	text-align: center;
+}
 /* ----- Header ----- */
 #header {
 	position: relative;
@@ -63,6 +71,21 @@ h4 {
 .menu li a:hover {
 	color: #660000;
 }
+#auth_area {
+	position: relative;
+}
+#auth_area a {
+	color: #FFFA00;
+	font-weight: bold;
+	font-size: 14px;
+	font-family: Arial;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+#auth_area a:hover {
+	color: #FF0000;
+}
 /* ------ Content ------- */
 .sidebar {
 	width: 243px;
@@ -80,7 +103,7 @@ h4 {
 #content {
 	background: #FFF;
 }
-#content:after, .title:after, #base .content:after {
+#content:after, .title:after, #base .content:after, .form-group:after {
 	clear: both;
 	content: "";
 	display: table;
@@ -139,6 +162,47 @@ h4 {
 	font-size: 12px;
 	line-height: 18px;
 }
+
+/*-------Forms style-----*/
+.form-group {
+	margin: auto;
+}
+.form-label {
+	float: left;
+	width: 150px;
+	text-align: right;
+	margin-right: 5px;
+}
+.form-control {
+	width: 100px;
+	float: left;
+}
+.button {
+	background: #660000;
+	color: #FFF;
+}
+/*-------Admin menu --------*/
+
+#admin_navbar {
+	background: url("../images/nav_bg.png") repeat-x;
+	height: 65px;
+	width: 1000px;
+}
+#admin_navbar .menu li a{
+	font-weight: normal;
+	color: #000;
+}
+#admin_navbar .menu {
+	margin: auto;
+	
+}
+#admin_navbar .menu li {
+	border-left: 1px solid #bbbbbb;
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+
 
 /* ------ Footer ------- */
 #footer {
