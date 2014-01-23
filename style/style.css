@@ -27,6 +27,16 @@ h5 {
 	font-weight: bold;
 	font-size: 12px;
 }
+h2 {
+	color: #cc3333;
+	font-family: Arial;
+	font-size: 1.5em;
+	font-weight: bold;
+	padding: 20px 0 0 10px;
+}
+label {
+	display: block;
+}
 .text_center {
 	text-align: center;
 }
@@ -103,7 +113,7 @@ h5 {
 #content {
 	background: #FFF;
 }
-#content:after, .title:after, #base .content:after, .form-group:after {
+#content:after, .title:after, #base .content:after, .form-group:after, .add_form, .division_list, .total_rows, .action_select {
 	clear: both;
 	content: "";
 	display: table;
@@ -167,6 +177,9 @@ h5 {
 .form-group {
 	margin: auto;
 }
+.form-group img {
+	padding-bottom: 10px;
+}
 .form-label {
 	float: left;
 	width: 150px;
@@ -180,6 +193,10 @@ h5 {
 .button {
 	background: #660000;
 	color: #FFF;
+	border: 1px solid #999;
+	text-decoration: none;
+	font-size: 12px;
+	padding: 0px 5px 0px 5px;
 }
 /*-------Admin menu --------*/
 
@@ -201,8 +218,127 @@ h5 {
 	padding-top: 16px;
 	padding-bottom: 16px;
 }
+.admin_menu_info ul {
+	list-style-type: disc;
+	padding: 20px 0 20px 50px;
+}
+.filter {
+	float: left;
+}
+.filter b {
+	padding-left: 10px;
+	font-weight: bold;
+}
+.right_button {
+	float: right;
+	padding-right: 10px;
+	margin-bottom: 5px;
+}
+.add_form {
+	width: 800px;
+	margin: auto;
+	border: 1px solid #999;
+}
+.leftpart {
+	width: 30%;
+	float: left;
+}
+.rightpart {
+	width: 70%;
+	float: right;
+}
+.leftpart label {
+	font-size: 14px;
+	padding: 5px 0 10px 80px;
+}
+.title_admin {
+	margin: 50px 0px 25px 90px;
+}
+.dropdown_width {
+	width: 157px;
+}
 
+.full_width_table {
+	width: 980px;
+	margin: auto;
+	margin-top: 30px;
+}
 
+.full_width_table thead tr {
+	height: 30px;
+}
+.full_width_table thead th {
+	padding: 0px -1px 0px 3px;
+}
+.full_width_table thead{
+	background-color: #CCC;
+ 	font: bold 11px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	letter-spacing: 2px;
+}
+.full_width_table thead p {
+	margin-top: 5px;
+}
+.full_width_table tbody td {
+	border-bottom: 1px solid #CCC;
+	word-wrap: break-word;
+}
+.full_width_table tbody p {
+	padding: 10px 0px 10px 0px;
+	font-weight: normal;
+}
+.checkbox_col {
+	width: 4%;
+}
+.full_width_table th {
+	vertical-align: middle;
+	text-align: left;
+}
+.divis_col {
+	width: 16%;
+}
+.season_col {
+	width: 17%;
+}
+.team_col {
+	width: 24%;
+}
+.dir_col {
+	width: 20%;
+}
+.action_col {
+	width: 10%;
+}
+.action_col img{
+	padding-right: 10px;
+}
+.pagination {
+	text-align: center;
+	margin: 12px 0 12px 0;
+	font-family: Arial;
+}
+.pagination a {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #AAAADD;
+	text-decoration: none;
+	color: #000099;
+}
+.pagination strong {
+
+	padding: 2px 5px 2px 5px;
+margin: 2px;
+border: 1px solid #000099;
+font-weight: bold;
+background-color: #000099;
+color: #FFF;
+}
+.total_rows {
+	margin-top: 10px;
+}
+.action_select {
+	margin-left: 8px;
+	float: left;
+}
 
 /* ------ Footer ------- */
 #footer {

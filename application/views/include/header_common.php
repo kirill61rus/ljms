@@ -4,6 +4,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
 		<link href="<?=base_url('style/reset.css')?>" rel="stylesheet" type="text/css" />
 		<link href="<?=base_url('style/style.css')?>" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="<?=base_url();?>js/libraries/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="<?=base_url();?>js/division.js"></script>
+		<script type="text/javascript" src="<?=base_url();?>js/checkbox.js"></script>
+		<script type="text/javascript">var base_url = '<?php echo base_url() ?>';</script>
 		<!--[if IE 7]>
 			<link href="<?=base_url('style/ie7.css')?>" rel="stylesheet" type="text/css" />
 		<![endif]-->
