@@ -85,7 +85,7 @@ class Divisions extends CI_Controller {
 	}
 	function delete(){
 		if ($this->session->userdata('id')==1){
-			$this->division->delete($this->input->post('division_id'));
+			$this->division->delete($this->input->post('id'));
 		} else {
 			redirect(base_url('admin/auth'));
 		}

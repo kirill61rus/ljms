@@ -113,6 +113,9 @@ label {
 #content {
 	background: #FFF;
 }
+.content {
+	min-height: 500px;
+}
 #content:after, .title:after, #base .content:after, .form-group:after, .add_form, .division_list, .total_rows, .action_select {
 	clear: both;
 	content: "";
@@ -120,7 +123,7 @@ label {
 }
 .sidebar.left {
 	min-height: 130px;
-	background: url("../images/sidebar_bg.jpg") no-repeat right;
+	background: url("../images/sidebar_bg.jpg") no-repeat right top;
 }
 .sidebar .content {
 	padding: 10px;
@@ -158,7 +161,7 @@ label {
 	color: #c70000;
 	text-decoration: none;
 }
-.column.text a:hover{
+.column.text a:hover {
 	text-decoration: underline;
 }
 .about {
@@ -176,6 +179,9 @@ label {
 /*-------Forms style-----*/
 .form-group {
 	margin: auto;
+}
+.select_wide {
+	width: 155px;
 }
 .form-group img {
 	padding-bottom: 10px;
@@ -224,6 +230,7 @@ label {
 }
 .filter {
 	float: left;
+	margin-top: 15px;
 }
 .filter b {
 	padding-left: 10px;
@@ -240,11 +247,11 @@ label {
 	border: 1px solid #999;
 }
 .leftpart {
-	width: 30%;
+	width: 40%;
 	float: left;
 }
 .rightpart {
-	width: 70%;
+	width: 60%;
 	float: right;
 }
 .leftpart label {
@@ -293,13 +300,17 @@ label {
 	vertical-align: middle;
 	text-align: left;
 }
-.divis_col {
+.edit {
+	padding-left: 10px;
+}
+
+/*.divis_col {
 	width: 16%;
 }
 .season_col {
 	width: 17%;
 }
-.team_col {
+.teams_col {
 	width: 24%;
 }
 .dir_col {
@@ -307,7 +318,7 @@ label {
 }
 .action_col {
 	width: 10%;
-}
+}*/
 .action_col img{
 	padding-right: 10px;
 }
@@ -324,13 +335,12 @@ label {
 	color: #000099;
 }
 .pagination strong {
-
 	padding: 2px 5px 2px 5px;
-margin: 2px;
-border: 1px solid #000099;
-font-weight: bold;
-background-color: #000099;
-color: #FFF;
+	margin: 2px;
+	border: 1px solid #000099;
+	font-weight: bold;
+	background-color: #000099;
+	color: #FFF;
 }
 .total_rows {
 	margin-top: 10px;

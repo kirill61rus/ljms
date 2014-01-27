@@ -9,10 +9,13 @@ $(document).ready(function() {
     });
 
     function process_ids() {
-    	$('input[name="division_ids[]"]').remove();
+        var pathArray = window.location.pathname.split( '/' );
+        var segment = pathArray[3];
+        segment = segment.substring(0, segment.length - 1);        
+    	$('input[name="'+segment+'_ids[]"]').remove();
     	$(".check_div").each(function(){
     		if(this.checked){
-    			$('form#action_select').prepend('<input type="hidden" value="'+$(this).data('item-id')+'" name="division_ids[]">');
+    			$('form#action_select').prepend('<input type="hidden" value="'+$(this).data('item-id')+'" name="'+segment+'_ids[]">');
     		}
     	});
     }

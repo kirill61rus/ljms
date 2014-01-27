@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class System_users extends CI_Controller {
+class Teams extends CI_Controller {
 	public function __construct() {
         parent::__construct();
 		$this->load->model('admin/division'); 
@@ -43,7 +43,7 @@ class System_users extends CI_Controller {
 			$data['list'] = $this->division->names_list();
 			$data['limit'] = $limit;
 			$data['filter_data'] = $filter_data;
-			$this->load->view('admin/system_users', $data);
+			$this->load->view('admin/teams', $data);
 		} else {
 			redirect(base_url('admin/auth'));
 		}

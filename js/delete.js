@@ -2,9 +2,11 @@ $(document).ready(function(){
 
 	$(document).on("click", "a[href='#delete']", function(e){
 		e.preventDefault();
+		var pathArray = window.location.pathname.split( '/' );
+		var segment = pathArray[3];
 	 	if (confirm("Are you sure you want to delete this item?")){
-		 	var division_id = $(this).data("item-id");
-		 	$.post(base_url+'admin/divisions/delete', {division_id: division_id});
+		 	var id = $(this).data("item-id");
+		 	$.post(base_url+'admin/'+segment+'/delete', {id: id});
 
 		    $(this).parents("tr").animate({ opacity: "hide" }, "slow");
 	 	}

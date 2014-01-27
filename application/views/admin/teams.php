@@ -1,17 +1,12 @@
 <?php $this->load->view('admin/include/header')?>
 <?php $this->load->view('admin/include/admin_menu')?>
 <div class="admin_menu_info">
-	<h2>Divisions</h2>
+	<h2>Teams</h2>
 	<?php echo ($this->session->flashdata('item')); ?>
-	<ul>
-		<li>"Ages" - Age group that applies to a particular division.</li>
-		<li>"Base Fee" - Amount charged for a registration.</li>
-		<li>"Add-on Fee" - Amount charged during registration for each additional child being registered.</li>
-	</ul>
 </div>
 	<?php 
 		$attributes = array('id' => 'filter',  'method' => 'get');
-		echo form_open_multipart('admin/divisions/', $attributes);
+		echo form_open_multipart('admin/teams/', $attributes);
 	?>
 <div class="filter">
 	<form>
@@ -23,13 +18,14 @@
 			endforeach;
 		echo form_dropdown('id', $options, $filter['id']);
 		?>
-		Season:
+		League type:
 		<?php $options = array(
-			''  => 'All',
-			'0'    => 'Standart',
-			'1' => 'Fall Ball',
-			);
-		echo form_dropdown('season', $options, $filter['season']);
+			''  => 'Select',
+			'1'    => 'LJMS Teams',
+			'2' => 'Non conference Teams
+			',
+		);
+		echo form_dropdown('league_type_id', $options, $filter['league_type_id']);
 		?>
 		Status:
 		<?php $options = array(
@@ -44,17 +40,17 @@
 </div>
 <?php echo form_close()?>
 <div class="right_button">
-	<a class="button" href="<?=base_url('admin/divisions/add')?>">Add division</a>
+	<a class="button" href="<?=base_url('admin/teams/add')?>">Add team</a>
 </div>
 <div class="right_button pagination total_rows">
-	<a href="<?=base_url('admin/divisions/?').$filter_data.'limit=10'?>">10</a>
-	<a href="<?=base_url('admin/divisions/?').$filter_data.'limit=20'?>">20</a>
-	<a href="<?=base_url('admin/divisions/?').$filter_data.'limit=30'?>">30</a>
-	<a href="<?=base_url('admin/divisions/?').$filter_data.'limit=all'?>">All</a>
+	<a href="<?=base_url('admin/teams/?').$filter_data.'limit=10'?>">10</a>
+	<a href="<?=base_url('admin/teams/?').$filter_data.'limit=20'?>">20</a>
+	<a href="<?=base_url('admin/teams/?').$filter_data.'limit=30'?>">30</a>
+	<a href="<?=base_url('admin/teams/?').$filter_data.'limit=all'?>">All</a>
 </div>
 	<?php 
 		$attributes = array('id' => 'action_select');
-		echo form_open_multipart('admin/divisions/action', $attributes);
+		echo form_open_multipart('admin/teams/action', $attributes);
 	?>
 <div class="action_select">
 	<?php $options = array(
@@ -72,10 +68,14 @@
 	<thead>
 		<tr>
 			<th class ="checkbox_col" ><input class="check_all" type="checkbox" name="#"></th>
+	<th class="team_col"><p>TEAM</p></th>
 			<th class="divis_col"><p>DIVISION</p></th>
-			<th class="season_col"><p>SEASON</p></th>
-			<th class="teams_col"><p>TEAM(S)</p></th>
-			<th class="dir_col"><p>DIRECTOR</p></th>
+	<th class="coach_col"><p>COACH</p></th>
+	<th class="wins_col"><p>WINS</p></th>
+	<th class="loses_col"><p>LOSES</p></th>
+	<th class="ties_col"><p>TIES</p></th>
+	<th class="average_col"><p>AVERAGE</p></th>
+	<th class="league_col"><p>LEAGUE TYPE</p></th>
 			<th class="action_col"><p>ACTION</p></th>
 		</tr>
 	</thead>
@@ -83,13 +83,18 @@
 		<?php foreach($divisions as $item) :?>
 			<tr>
 				<td class ="checkbox_col"><input data-item-id="<?php echo ($item['id']);?>" class="check_div" type="checkbox"></td>
+				<td  class="team_col"><p><?php echo htmlspecialchars($item['team_name']);?></p></td>
 				<td class="divis_col"><p><?php echo htmlspecialchars($item['division_name']);?></p></td>
-				<td class="season_col"><p><?php echo (($item['fall_ball'] == 0 ? "Spring/Summer" : "Fall Ball"))?></p></td>
-				<td class="teams_col"><p><?php echo ($item['team_name']);?></p></td>
-				<td class="dir_col"><p>директор нужно вывести</p></td>
+				<td class="coach_col"><p>COACH</p></td>
+				<td class="wins_col"><p>0</p></td>
+				<td class="loses_col"><p>0</p></td>
+				<td class="ties_col"><p>0</p></td>
+				<td class="average_col"><p>0</p></td>
+				<td class="league_col"><p><?php echo htmlspecialchars($item['league_name']);?></p></td>
 				<td class="action_col">
-				<a href="<?php echo base_url('admin/divisions/edit').'?'.'id='.($item['id'])?>" class="edit"><img src="<?=base_url('images/edit.png')?>"></a>
-				<a href="#delete" data-item-id="<?php echo ($item['id']);?>" data-item-page="divisions" class="delete"><img src="<?=base_url('images/delete.png')?>"></a>
+					<a class="button" href="<?=base_url('admin/team/add')?>">Assign players</a>
+					<a href="<?php echo base_url('admin/teams/edit').'?'.'id='.($item['id'])?>" class="edit"><img src="<?=base_url('images/edit.png')?>"></a>
+					<a href="#delete" data-item-id="<?php echo ($item['id']);?>" class="delete"><img src="<?=base_url('images/delete.png')?>"></a>
 				</td>
 			</tr>
 		<?php endforeach;?>
