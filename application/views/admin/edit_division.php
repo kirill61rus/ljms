@@ -1,6 +1,8 @@
 <?php $this->load->view('admin/include/header')?>
 <?php $this->load->view('admin/include/admin_menu')?>
 <h2 class="title_admin">Edit Division</h2>
+<?php $this->flash->show(); 
+if (validation_errors()){ echo '<div class="alert-error">'.validation_errors().'</div>';}?>
 	<?php 
 		$attributes = array('id' => 'add_division');
 		echo form_open_multipart('admin/divisions/edit?id='.$this->input->get('id'), $attributes);
@@ -13,7 +15,7 @@
 						'1'    => 'Active',
 						'0' => 'Inactive',
 						);
-					$class = 'class="dropdown_width"';
+					$class = 'class="select_wide"';
 					echo form_dropdown('status', $options, $division_data[0]['status'], $class);
 					?>
 				</div>

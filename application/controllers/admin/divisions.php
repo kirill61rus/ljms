@@ -20,7 +20,7 @@ class Divisions extends CI_Controller {
 			 		$data['filter'][$filter_name] = '';
 			 	}
 			}
-
+			// number of filtered rows
 			$config['total_rows'] = $this->division->count_filtered($data['filter']);
 			if ($limit = $this->input->get('limit')) { 
 				if ($limit == 'all') $limit = $config['total_rows'];
@@ -72,9 +72,16 @@ class Divisions extends CI_Controller {
 		if ($this->session->userdata('id')==1){
 			if ($data = $this->input->post()) {
 				$division = $this->process_division_data();
-				$this->division->add($division);
-				$this->session->set_flashdata('item', 'Add success');		
-				redirect(base_url('admin/divisions'));
+				$this->load->library('form_validation');
+				$this->load->library('division_validation');
+				if($this->division_validation->set_validation_rules()) {
+
+					$division_id = $this->division->add($division);
+					$this->session->set_flashdata('success', 'Division has been created');		
+					redirect(base_url('admin/divisions/edit?id='.$division_id));
+				} else {
+					$this->load->view('admin/add_division');
+				}
 			} else {
 				$this->load->view('admin/add_division');
 			}
@@ -102,11 +109,19 @@ class Divisions extends CI_Controller {
 		if ($this->session->userdata('id')==1){
 			if ($data = $this->input->post()) {
 				$division = $this->process_division_data();
+				if ($division['logo'] == 0){ unset($division['logo']);}
 
-				$division = array_filter($division);
-				$this->division->edit($this->input->get('id'), $division);
-				$this->session->set_flashdata('item', 'Add success');		
-				redirect(base_url('admin/divisions/edit?id='.$this->input->get('id')));
+				$this->load->library('form_validation');
+				$this->load->library('division_validation');
+				if($this->division_validation->set_validation_rules()) {
+
+					$this->division->edit($this->input->get('id'), $division);
+					$this->session->set_flashdata('success', 'Edit division successfully');			
+					redirect(base_url('admin/divisions/edit?id='.$this->input->get('id')));
+				} else {
+					$division_data = $this->division->division_data($this->input->get()['id']);
+					$this->load->view('admin/edit_division', array('division_data' => $division_data));
+				}				
 			} else {
 				$division_data = $this->division->division_data($this->input->get()['id']);
 				$this->load->view('admin/edit_division', array('division_data' => $division_data));
@@ -124,5 +139,13 @@ class Divisions extends CI_Controller {
 		}
 		$division['logo'] = $this->logo->upload_logo();
 		return $division;
+	}
+	function age_check() {
+		if ($this->input->post('age_to') <= $this->input->post('age_from')) {
+			$this->form_validation->set_message('age_check', 'Incorrect years interval');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
 	}
 }

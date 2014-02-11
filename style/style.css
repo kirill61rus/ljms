@@ -40,6 +40,25 @@ label {
 .text_center {
 	text-align: center;
 }
+.alert-danger, .alert-error{
+	color: red;
+	text-align: center;
+	font-weight: bold;
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+.alert-success {
+	color: green;
+	text-align: center;
+	font-weight: bold;
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+.alert-error {
+	text-align: left;
+	font-size: 14px;
+	margin-left: 100px;
+}
 /* ----- Header ----- */
 #header {
 	position: relative;
@@ -81,6 +100,14 @@ label {
 .menu li a:hover {
 	color: #660000;
 }
+/*---inactiv link's---*/
+.menu .inactiv_link {
+	color: #969696;
+}
+.menu .inactiv_link:hover {
+	color: #969696;
+}
+
 #auth_area {
 	position: relative;
 }
@@ -193,7 +220,6 @@ label {
 	margin-right: 5px;
 }
 .form-control {
-	width: 100px;
 	float: left;
 }
 .button {
@@ -203,6 +229,24 @@ label {
 	text-decoration: none;
 	font-size: 12px;
 	padding: 0px 5px 0px 5px;
+}
+.active_button, .inactive_button {
+	border: 5px solid #660000;
+	text-decoration: none;
+	font-size: 13px;
+	padding: 0px 5px 0px 5px;
+	display: inline-block;
+	margin: 10px 0 10px 77px
+}
+.inactive_button {
+	border: 5px solid #CCC;
+	background: #CCC;
+	color: #000;
+	cursor: default;
+}
+.active_button {
+	color: #FFF;
+	background: #660000;
 }
 /*-------Admin menu --------*/
 
@@ -224,10 +268,12 @@ label {
 	padding-top: 16px;
 	padding-bottom: 16px;
 }
-.admin_menu_info ul {
-	list-style-type: disc;
-	padding: 20px 0 20px 50px;
+/*---inactiv admin lik's---*/
+#admin_navbar .menu .inactiv_link {
+	color: #969696;
 }
+
+
 .filter {
 	float: left;
 	margin-top: 15px;
@@ -244,7 +290,11 @@ label {
 .add_form {
 	width: 800px;
 	margin: auto;
-	border: 1px solid #999;
+	border: 1px solid #CCC;
+	margin-bottom: 10px;
+}
+.add_form h3 {
+	padding: 20px 0 20px 77px;
 }
 .leftpart {
 	width: 40%;
@@ -252,19 +302,24 @@ label {
 }
 .rightpart {
 	width: 60%;
-	float: right;
+	float: left;
 }
 .leftpart label {
-	font-size: 14px;
 	padding: 5px 0 10px 80px;
+}
+.hilf_width_col {
+	width: 50%;
+	float: left;
+}
+.form-group label:first-child{
+		padding: 5px 0 10px 80px;
+}
+.form-group label{
+	font-size: 14px;
 }
 .title_admin {
 	margin: 50px 0px 25px 90px;
 }
-.dropdown_width {
-	width: 157px;
-}
-
 .full_width_table {
 	width: 980px;
 	margin: auto;
@@ -303,22 +358,25 @@ label {
 .edit {
 	padding-left: 10px;
 }
+.user_roles {
+	width: 650px;
+	margin: auto;
+	margin-top: 30px;
+}
+.user_roles thead{
+	background-color: #CCC;
+ 	font: bold 11px "Trebuchet MS", Arial, Helvetica, sans-serif;
 
-/*.divis_col {
-	width: 16%;
 }
-.season_col {
-	width: 17%;
+.user_roles th {
+	border: 2px solid #FFF;
 }
-.teams_col {
-	width: 24%;
+tbody .quarter {
+	width: 25%;
+	font-weight: bold;
+	font-size: 14px;
+	padding-top: 5px;
 }
-.dir_col {
-	width: 20%;
-}
-.action_col {
-	width: 10%;
-}*/
 .action_col img{
 	padding-right: 10px;
 }
@@ -349,6 +407,20 @@ label {
 	margin-left: 8px;
 	float: left;
 }
+.title_form {
+	color: #777777;
+	font-size: 18px;
+	text-decoration: underline;
+	font-family: Arial, "MS Trebuchet", sans-serif;
+	font-weight: bold;
+}
+#roles_block {
+	height: 30px;
+}
+#roles_block .button {
+	padding: 3px 15px 3px 15px;
+}
+
 
 /* ------ Footer ------- */
 #footer {

@@ -14,12 +14,12 @@
 				<div class="leftpart"><label>Division *</label></div>
 				<div class="rightpart">
 					<?php
-						$setting = 'class= "select_wide"';
+						$class = 'class= "select_wide"';
 						$options[''] =  'Select';
 						foreach($list as $item) :
-						$options[$item['id']] =  $item['name'];
+						$options[$item['id']] =  htmlspecialchars($item['name']);
 						endforeach;
-						echo form_dropdown('division_id', $options, '',$setting);
+						echo form_dropdown('division_id', $options, '',$class);
 					?>
 				</div>
 			</div>
@@ -32,7 +32,7 @@
 							'2' => 'Non conference Teams
 							',
 						);
-						echo form_dropdown('league_type_id', $options, '',$setting);
+						echo form_dropdown('league_type_id', $options, '',$class);
 					?>
 
 				</div>
@@ -45,7 +45,7 @@
 							'1'    => 'Active',
 							'0' => 'Inactive',
 						);
-						echo form_dropdown('status', $options, '',$setting);
+						echo form_dropdown('status', $options, '',$class);
 					?>
 				</div>
 			</div>
@@ -56,7 +56,7 @@
 							'0'    	=> 'No',
 							'1' 	=> 'Yes',
 						);
-						echo form_dropdown('is_visitor', $options, '',$setting);
+						echo form_dropdown('is_visitor', $options, '',$class);
 					?>
 				</div>
 			</div>

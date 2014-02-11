@@ -16,7 +16,7 @@
 					<?php
 						$options[''] =  'Select';
 						foreach($data['division_list'] as $item) :
-						$options[$item['id']] =  $item['name'];
+						$options[$item['id']] =  htmlspecialchars($item['name']);
 						endforeach;
 						$setting = 'class= "select_wide"';
 						echo form_dropdown('division_id', $options,  $data['team_data'][0]['division_id'], $setting);

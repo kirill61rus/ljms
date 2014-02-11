@@ -12,11 +12,12 @@
 	<form>
 		<b>Filter by:</b> Division:
 		<?php
+			$class = 'class="select_wide"';
 			$options[''] =  'All';
 			foreach($list as $item) :
-			$options[$item['id']] =  $item['name'];
+			$options[$item['id']] =  htmlspecialchars($item['name']);
 			endforeach;
-		echo form_dropdown('id', $options, $filter['id']);
+		echo form_dropdown('id', $options, $filter['id'], $class);
 		?>
 		League type:
 		<?php $options = array(
@@ -59,9 +60,10 @@
 		'active' => 'Active',
 		'inactive' => 'Inactive',
 		);
-	echo form_dropdown('action', $options);
+		$action_class = 'class="action_dropdown"';
+	echo form_dropdown('action', $options, '', $action_class);
 	?>
-	<input type="submit" class="button" value="Action">
+	<input type="submit" class="inactiv" id = 'mass_action_button'onclick="return confirm('Are you sure?')" value="Action" disabled>
 </div>
 <?php echo form_close()?>
 <table class="full_width_table">

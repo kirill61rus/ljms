@@ -5,3 +5,9 @@
 .menu li {
 	display: inline;
 }
+.active_button {
+	display: inline;
+}
+.inactive_button {
+	display: inline;
+}

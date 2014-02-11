@@ -4,6 +4,7 @@
 <?php echo form_open('admin/auth', array('class' => 'text_center'))?>
 
     <h5>Administrator Login Only</h5>	
+    <?php $this->flash->show(); ?>
 
     <div class="form-group">
     	<div class="form-label">

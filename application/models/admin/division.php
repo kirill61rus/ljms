@@ -1,4 +1,4 @@
-.<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Division extends CI_Model {
 
@@ -17,8 +17,10 @@ class Division extends CI_Model {
     	return $this->db->count_all_results('divisions');
     }
 	function get_list($num, $offset, $filter) {	
-
 		$this->db->join('teams', 'teams.division_id = divisions.id', 'left')
+				 ->join('roles_to_users', 'roles_to_users.division_id = divisions.id AND roles_to_users.role_id = 2', 'left')
+				 ->join('users', 'users.id = roles_to_users.user_id', 'left')
+				 ->select('users.first_name as user_name')
 				 ->select('GROUP_CONCAT(teams.name SEPARATOR "<br/>") as team_name', false)
 				 ->select('fall_ball')
 				 ->select('divisions.id')

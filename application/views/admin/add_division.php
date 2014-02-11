@@ -2,9 +2,11 @@
 <?php $this->load->view('admin/include/admin_menu')?>
 <h2 class="title_admin">Add Division</h2>
 	<?php 
+		if (validation_errors()){ echo '<div class="alert-error">'.validation_errors().'</div>';}
 		$attributes = array('id' => 'add_division');
 		echo form_open_multipart('admin/divisions/add', $attributes);
 	?>
+
 		<div class="add_form">
 			<div class="form-group">
 				<div class="leftpart"><label>Status *</label></div>
@@ -13,8 +15,8 @@
 						'1'    => 'Active',
 						'0' => 'Inactive',
 						);
-					$class = 'class="dropdown_width"';
-					echo form_dropdown('status', $options, $class);
+					$class = 'class="select_wide"';
+					echo form_dropdown('status', $options, set_value('status'), $class);
 					?>
 						<input type="checkbox" value="1" name="fall_ball">Fall Ball
 				</div>
@@ -22,7 +24,7 @@
 
 			<div class="form-group">
 				<div class="leftpart"><label>Division Name *</label></div>
-				<div class="rightpart"><?php echo form_input('name'); ?></div>
+				<div class="rightpart"><?php $data = array('name' => 'name', 'value' => set_value('name')); echo form_input($data); ?></div>
 			</div>
 
 			<div class="form-group">
@@ -43,32 +45,34 @@
 						'17' => '17',
 						'18' => '18',
 						);
-					echo form_dropdown('age_from', $options);
+					$age_from_id = 'id="age_from"';
+					echo form_dropdown('age_from', $options, set_value('age_from'), $age_from_id);
 					?> years  To *
 					<?php 
-					echo form_dropdown('age_to', $options);
-					?> years
+					$age_to_id = 'id="age_to"';
+					echo form_dropdown('age_to', $options, set_value('age_to'), $age_to_id);
+					?>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<div class="leftpart"><label>Description</label></div>
-				<div class="rightpart"><?php echo form_textarea('description'); ?></div>
+				<div class="rightpart"><?php $data = array('name' => 'description', 'value' => set_value('description')); echo form_textarea($data); ?></div>
 			</div>
 
 			<div class="form-group"> 
 				<div class="leftpart"><label>Rules</label></div>
-				<div class="rightpart"><?php echo form_textarea('rules'); ?></div>
+				<div class="rightpart"><?php $data = array('name' => 'rules', 'value' => set_value('rules')); echo form_textarea($data); ?></div>
 			</div>
 
 			<div class="form-group">
 				<div class="leftpart"><label>Base Fee</label></div>
-				<div class="rightpart"><?php echo '$'.form_input('base_fee'); ?></div>
+				<div class="rightpart"><?php $data = array('name' => 'base_fee', 'value' => set_value('base_fee')); echo '$'.form_input($data); ?></div>
 			</div>
 
 			<div class="form-group">
 				<div class="leftpart"><label>Addon Fee</label></div>
-				<div class="rightpart"><?php echo '$'.form_input('addon_fee'); ?></div>
+				<div class="rightpart"><?php $data = array('name' => 'addon_fee', 'value' => set_value('addon_fee')); echo '$'.form_input($data); ?></div>
 			</div>
 
 			<div class="form-group">

@@ -19,4 +19,12 @@ $(document).ready(function() {
     		}
     	});
     }
+    $( ".action_dropdown" ).change(function() {
+        var value_action = $(this).val();
+        if (value_action) {
+             $("#mass_action_button").attr({"class":"button"}).removeAttr("disabled"); ;
+        } else {
+             $("#mass_action_button").attr({"class":"inactiv", "disabled":"true"});
+        }
+    });
 });   

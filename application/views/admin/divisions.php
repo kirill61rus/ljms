@@ -2,12 +2,7 @@
 <?php $this->load->view('admin/include/admin_menu')?>
 <div class="admin_menu_info">
 	<h2>Divisions</h2>
-	<?php echo ($this->session->flashdata('item')); ?>
-	<ul>
-		<li>"Ages" - Age group that applies to a particular division.</li>
-		<li>"Base Fee" - Amount charged for a registration.</li>
-		<li>"Add-on Fee" - Amount charged during registration for each additional child being registered.</li>
-	</ul>
+	<?php $this->flash->show(); ?>
 </div>
 	<?php 
 		$attributes = array('id' => 'filter',  'method' => 'get');
@@ -17,11 +12,12 @@
 	<form>
 		<b>Filter by:</b> Division:
 		<?php
+			$class = 'class="select_wide"';
 			$options[''] =  'All';
 			foreach($list as $item) :
-			$options[$item['id']] =  $item['name'];
+			$options[$item['id']] =  htmlspecialchars($item['name']);
 			endforeach;
-		echo form_dropdown('id', $options, $filter['id']);
+		echo form_dropdown('id', $options, $filter['id'], $class);
 		?>
 		Season:
 		<?php $options = array(
@@ -63,9 +59,10 @@
 		'active' => 'Active',
 		'inactive' => 'Inactive',
 		);
-	echo form_dropdown('action', $options);
+		$action_class = 'class="action_dropdown"';
+	echo form_dropdown('action', $options, '', $action_class);
 	?>
-	<input type="submit" class="button" value="Action">
+	<input type="submit" class="inactiv" id = 'mass_action_button'onclick="return confirm('Are you sure?')" value="Action" disabled>
 </div>
 <?php echo form_close()?>
 <table class="full_width_table">
@@ -86,7 +83,7 @@
 				<td class="divis_col"><p><?php echo htmlspecialchars($item['division_name']);?></p></td>
 				<td class="season_col"><p><?php echo (($item['fall_ball'] == 0 ? "Spring/Summer" : "Fall Ball"))?></p></td>
 				<td class="teams_col"><p><?php echo ($item['team_name']);?></p></td>
-				<td class="dir_col"><p>директор нужно вывести</p></td>
+				<td class="dir_col"><p><?php echo ($item['user_name']);?></p></td>
 				<td class="action_col">
 				<a href="<?php echo base_url('admin/divisions/edit').'?'.'id='.($item['id'])?>" class="edit"><img src="<?=base_url('images/edit.png')?>"></a>
 				<a href="#delete" data-item-id="<?php echo ($item['id']);?>" data-item-page="divisions" class="delete"><img src="<?=base_url('images/delete.png')?>"></a>

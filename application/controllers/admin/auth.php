@@ -5,12 +5,16 @@ class Auth extends CI_Controller {
 		if ($this->session->userdata('id')==1){
 			redirect(base_url('admin/system_users'));
 		} else { 
-			$this->load->view('admin/auth');
-			if (($this->input->post('email') == 'admin@admin.com') && ($this->input->post('password') == 'admin')) {
-				$this->session->set_userdata('id', '1');
-				redirect(base_url('admin/system_users'));
+			if ($this->input->post()){
+					if (($this->input->post('email') == 'admin@admin.com') && ($this->input->post('password') == 'admin')) {
+					$this->session->set_userdata('id', '1');
+					redirect(base_url('admin/system_users'));
+				} else {
+					$this->session->set_flashdata('error_small', 'Incorrect email/password');
+					redirect(base_url('admin'));
+				}
 			} else {
-				$this->session->set_flashdata('error', 'Incorrect login or password');
+				$this->load->view('admin/auth');
 			}
 		}
 	}

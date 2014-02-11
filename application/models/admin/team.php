@@ -6,12 +6,6 @@ class Team extends CI_Model {
      * loads the divisionss from the database
      * @return array  this divisions list
      */
-    function names_list() {
-		return $this->db->select('name')
-						->select('id')
-		    			->get('divisions')
-		    			->result_array();
-    }
     function count_filtered($filter) {
     	$this->team_filter($filter);
     	return $this->db->count_all_results('teams');
