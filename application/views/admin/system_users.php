@@ -35,10 +35,10 @@
 	<a class="button" href="<?=base_url('admin/system_users/add')?>">Add user</a>
 </div>
 <div class="right_button pagination total_rows">
-	<a href="<?=base_url('admin/system_users/?').$filter_data.'limit=10'?>">10</a>
-	<a href="<?=base_url('admin/system_users/?').$filter_data.'limit=20'?>">20</a>
-	<a href="<?=base_url('admin/system_users/?').$filter_data.'limit=30'?>">30</a>
-	<a href="<?=base_url('admin/system_users/?').$filter_data.'limit=all'?>">All</a>
+	<a <?php if (!isset($_GET['limit']) || $_GET['limit'] == '10') {  echo 'class="active_limit"';} ?> href="<?=base_url('admin/system_users/?').$filter_data.'limit=10'?>">10</a>
+	<a <?php if (isset($_GET['limit']) && $_GET['limit'] == '20') {  echo 'class="active_limit"';} ?> href="<?=base_url('admin/system_users/?').$filter_data.'limit=20'?>">20</a>
+	<a <?php if (isset($_GET['limit']) && $_GET['limit'] == '30') {  echo 'class="active_limit"';} ?> href="<?=base_url('admin/system_users/?').$filter_data.'limit=30'?>">30</a>
+	<a <?php if (isset($_GET['limit']) && $_GET['limit'] == 'all') { echo 'class="active_limit"';} ?> href="<?=base_url('admin/system_users/?').$filter_data.'limit=all'?>">All</a>
 </div>
 	<?php 
 		$attributes = array('id' => 'action_select');

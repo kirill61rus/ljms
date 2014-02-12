@@ -400,6 +400,14 @@ tbody .quarter {
 	background-color: #000099;
 	color: #FFF;
 }
+.pagination .active_limit{
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #000099;
+	font-weight: bold;
+	background-color: #000099;
+	color: #FFF;
+}
 .total_rows {
 	margin-top: 10px;
 }
