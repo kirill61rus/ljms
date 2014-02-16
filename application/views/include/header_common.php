@@ -8,6 +8,7 @@
 		<script type="text/javascript" src="<?=base_url();?>js/libraries/jquery.validate.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>js/delete.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>js/validation.js"></script>
+		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>js/mass_action.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>js/roles.js"></script>
 		<script type="text/javascript">var base_url = '<?php echo base_url() ?>';</script>

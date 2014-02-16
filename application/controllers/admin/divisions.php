@@ -72,9 +72,11 @@ class Divisions extends CI_Controller {
 		if ($this->session->userdata('id')==1){
 			if ($data = $this->input->post()) {
 				$division = $this->process_division_data();
+				$logo_format_validation = 'callback_image_check';
+				if (empty($division['logo'])){ unset($division['logo']); $logo_format_validation ='';}
 				$this->load->library('form_validation');
 				$this->load->library('division_validation');
-				if($this->division_validation->set_validation_rules()) {
+				if($this->division_validation->set_validation_rules($logo_format_validation)) {
 
 					$division_id = $this->division->add($division);
 					$this->session->set_flashdata('success', 'Division has been created');		
@@ -109,11 +111,12 @@ class Divisions extends CI_Controller {
 		if ($this->session->userdata('id')==1){
 			if ($data = $this->input->post()) {
 				$division = $this->process_division_data();
-				if ($division['logo'] == 0){ unset($division['logo']);}
+				$logo_format_validation = 'callback_image_check';
+				if (empty($division['logo'])){ unset($division['logo']); $logo_format_validation ='';}
 
 				$this->load->library('form_validation');
 				$this->load->library('division_validation');
-				if($this->division_validation->set_validation_rules()) {
+				if($this->division_validation->set_validation_rules($logo_format_validation)) {
 
 					$this->division->edit($this->input->get('id'), $division);
 					$this->session->set_flashdata('success', 'Edit division successfully');			
@@ -148,4 +151,16 @@ class Divisions extends CI_Controller {
 			return TRUE;
 		}
 	}
-}
+	function image_check() {
+		if($_FILES['userfile']['type'] != 'image/jpeg'
+		&&  $_FILES['userfile']['type'] != 'image/jpg'
+		&&  $_FILES['userfile']['type'] != 'image/gif'
+		&& $_FILES['userfile']['type'] != 'image/png'){
+		 	$this->form_validation->set_message('image_check', 'Incorrect image format! Select jpg, png or gif');
+		     return FALSE;
+		}  else {
+			return TRUE;
+			}
+		}
+	}
+

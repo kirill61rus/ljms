@@ -30,20 +30,20 @@
 			<div class="form-group">
 				<div class="leftpart"><label>Ages From *</label></div>
 				<div class="rightpart"><?php $options = array(
-						'5'  => '5',
-						'6'  => '6',
-						'7'  => '7',
-						'8'  => '8',
-						'9'  => '9',
-						'10' => '10',
-						'11' => '11',
-						'12' => '12',
-						'13' => '13',
-						'14' => '14',
-						'15' => '15',
-						'16' => '16',
-						'17' => '17',
-						'18' => '18',
+						5  => 5,
+						6  => 6,
+						7  => 7,
+						8  => 8,
+						9  => 9,
+						10 => 10,
+						11 => 11,
+						12 => 12,
+						13 => 13,
+						14 => 14,
+						15 => 15,
+						16 => 16,
+						17 => 17,
+						18 => 18,
 						);
 					$age_from_id = 'id="age_from"';
 					echo form_dropdown('age_from', $options, set_value('age_from'), $age_from_id);

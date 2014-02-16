@@ -19,12 +19,20 @@ $(document).ready(function(){
             age_to:{
                age_validation: true,
             },
+           /* userfile:{
+                 accept: "image/jpg,image/png,image/jpeg,image/gif",
+            },*/
        },
+        messages: {
+            userfile:{
+                accept: 'Incorrect image format! Select jpg, png or gif'
+            }
+        }
     });
         $.validator.addMethod('age_validation',
-        function(val,el) {
-            var from = $("#age_from").val();
-            var to   = $("#age_to").val();
+        function() {
+            var from = parseInt($("#age_from").val());
+            var to   = parseInt($("#age_to").val());
             if (to<=from) {
                     return  false;
                 } else {
