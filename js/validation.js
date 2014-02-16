@@ -19,9 +19,9 @@ $(document).ready(function(){
             age_to:{
                age_validation: true,
             },
-           /* userfile:{
+           userfile:{
                  accept: "image/jpg,image/png,image/jpeg,image/gif",
-            },*/
+            },
        },
         messages: {
             userfile:{
