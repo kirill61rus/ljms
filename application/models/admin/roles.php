@@ -35,10 +35,12 @@
 				$this->db->where('roles_to_users.role_id', $filter['role_id']);
 			}
 			if($filter['role_id'] == 4 || $filter['role_id'] == 3){
+				$this->db->where('roles_to_users.role_id', $filter['role_id']);
 				$this->db->where('roles_to_users.division_id', $filter['division_id']);
 				$this->db->where('roles_to_users.team_id', $filter['team_id']);
 			}
 			if($filter['role_id'] == 2){
+				$this->db->where('roles_to_users.role_id', $filter['role_id']);
 				$this->db->where('roles_to_users.division_id', $filter['division_id']);
 			}
 		}
