@@ -9,7 +9,7 @@ class Logo {
 	function upload_logo() {
 		$config['upload_path']   = './'.URL_LOGO;
 		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']		 = 1500;
+		$config['max_size']		 = 1;
 		$config['encrypt_name']  = TRUE;
 
 		$CI =& get_instance();

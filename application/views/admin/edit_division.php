@@ -54,7 +54,7 @@ if (validation_errors()){ echo '<div class="alert-error">'.validation_errors().'
 
 			<div class="form-group">
 				<div class="leftpart"><label>Description</label></div>
-				<div class="rightpart"><?php $value = $division_data[0]['description']; echo form_textarea('description', $value); ?></div>
+				<div class="rightpart"><?php echo form_textarea('description', set_value('description',$division_data[0]['description'])); ?></div>
 			</div>
 
 			<div class="form-group"> 

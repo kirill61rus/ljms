@@ -10,7 +10,7 @@ $(document).ready(function() {
 
     function process_ids() {
         var pathArray = window.location.pathname.split( '/' );
-        var segment = pathArray[3];
+        var segment = pathArray[4];
         segment = segment.substring(0, segment.length - 1);        
     	$('input[name="'+segment+'_ids[]"]').remove();
     	$(".check_div").each(function(){

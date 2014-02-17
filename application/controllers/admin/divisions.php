@@ -4,6 +4,7 @@ class Divisions extends CI_Controller {
 	public function __construct() {
         parent::__construct();
 		$this->load->model('admin/division'); 
+
     }
 	function index(){
 		if ($this->session->userdata('id')==1){
@@ -72,8 +73,10 @@ class Divisions extends CI_Controller {
 		if ($this->session->userdata('id')==1){
 			if ($data = $this->input->post()) {
 				$division = $this->process_division_data();
+
 				$logo_format_validation = 'callback_image_check';
 				if (empty($division['logo'])){ unset($division['logo']); $logo_format_validation ='';}
+
 				$this->load->library('form_validation');
 				$this->load->library('division_validation');
 				if($this->division_validation->set_validation_rules($logo_format_validation)) {
@@ -107,32 +110,41 @@ class Divisions extends CI_Controller {
 		}
 	} 
 
-	function edit(){
-		if ($this->session->userdata('id')==1){
-			if ($data = $this->input->post()) {
-				$division = $this->process_division_data();
-				$logo_format_validation = 'callback_image_check';
-				if (empty($division['logo'])){ unset($division['logo']); $logo_format_validation ='';}
+	function edit($id){
+        // find division by ID
+        $division = $this->division->find($this->input->get('id'));
 
-				$this->load->library('form_validation');
-				$this->load->library('division_validation');
-				if($this->division_validation->set_validation_rules($logo_format_validation)) {
+        // if form is submitted
+		if ($data = $this->input->post()) {
 
-					$this->division->edit($this->input->get('id'), $division);
-					$this->session->set_flashdata('success', 'Edit division successfully');			
-					redirect(base_url('admin/divisions/edit?id='.$this->input->get('id')));
-				} else {
-					$division_data = $this->division->division_data($this->input->get()['id']);
-					$this->load->view('admin/edit_division', array('division_data' => $division_data));
-				}				
-			} else {
-				$division_data = $this->division->division_data($this->input->get()['id']);
-				$this->load->view('admin/edit_division', array('division_data' => $division_data));
+            //??????
+			$division = $this->process_division_data();
+
+            // load libraries
+			$this->load->library('form_validation');
+			$this->load->library('division_validation');
+
+            // validate
+			if($this->division_validation->validate()) {
+
+                // do the Edit
+				if ($this->division->edit($id, $division)){
+                    $this->session->set_flashdata('success', 'Edit division successfully');
+                }else{
+                    $this->session->set_flashdata('error', 'Error');
+                }
+			
+				redirect(base_url('admin/divisions/edit?id='.$id));
 			}
-		} else {
-			redirect(base_url('admin/auth'));
+
+            // if validation is failed
+			$this->load->view('admin/edit_division');
+
+            return;			
 		}
 
+        // first load of the page
+		$this->load->view('admin/edit_division', array('division' => $division));
 	}
 	private function process_division_data() {
 		$this->load->library('logo');
