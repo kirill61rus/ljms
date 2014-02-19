@@ -68,7 +68,7 @@ class Division extends CI_Model {
 		$this->db->where('id', $id)
 				 ->update('divisions', $division); 
 	}
-	function division_data($id) {
+	function get_division_data_by_id($id) {
 		$this->db->where('id', $id);
 		return $this->db->get('divisions')->result_array();
 	}

@@ -23,7 +23,7 @@ if (validation_errors()){ echo '<div class="alert-error">'.validation_errors().'
 
 			<div class="form-group">
 				<div class="leftpart"><label>Division Name *</label></div>
-				<div class="rightpart"><?php $value = $division_data[0]['name']; echo form_input('name', $value);?></div>
+				<div class="rightpart"><?php echo form_input('name', set_value('name',$division_data[0]['name'])); ?></div>
 			</div>
 
 			<div class="form-group">
@@ -54,22 +54,22 @@ if (validation_errors()){ echo '<div class="alert-error">'.validation_errors().'
 
 			<div class="form-group">
 				<div class="leftpart"><label>Description</label></div>
-				<div class="rightpart"><?php $value = $division_data[0]['description']; echo form_textarea('description', $value); ?></div>
+				<div class="rightpart"><?php echo form_textarea('description', set_value('description',$division_data[0]['description'])); ?></div>
 			</div>
 
 			<div class="form-group"> 
 				<div class="leftpart"><label>Rules</label></div>
-				<div class="rightpart"><?php $value = $division_data[0]['rules']; echo form_textarea('rules', $value); ?></div>
+				<div class="rightpart"><?php echo form_textarea('rules', set_value('rules',$division_data[0]['rules'])); ?></div>
 			</div>
 
 			<div class="form-group">
 				<div class="leftpart"><label>Base Fee</label></div>
-				<div class="rightpart"><?php $value = $division_data[0]['base_fee']; echo '$'.form_input('base_fee', $value); ?></div>
+				<div class="rightpart"><?php echo form_input('base_fee', set_value('base_fee',$division_data[0]['base_fee'])); ?></div>
 			</div>
 
 			<div class="form-group">
 				<div class="leftpart"><label>Addon Fee</label></div>
-				<div class="rightpart"><?php $value = $division_data[0]['addon_fee']; echo '$'.form_input('addon_fee', $value); ?></div>
+				<div class="rightpart"><?php echo form_input('addon_fee', set_value('addon_fee',$division_data[0]['addon_fee'])); ?></div>
 			</div>
 
 			<div class="form-group">

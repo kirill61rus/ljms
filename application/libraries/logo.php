@@ -2,9 +2,9 @@
 
 class Logo { 
     /**
-     * resize and rename page
+     * checks the format and rename page
      * @param url page
-     * @return page this naw name and size 
+     * @return page this new name or error
      */
 	function upload_logo() {
 		$config['upload_path']   = './'.URL_LOGO;
@@ -14,21 +14,32 @@ class Logo {
 
 		$CI =& get_instance();
 		$CI->load->library('upload', $config);
-		$CI->upload->do_upload();
-		$image_data = $CI->upload->data();
+		/**
+		* resize 
+		* @param url page
+		* @return page this new size or error
+		*/
+		if ($CI->upload->do_upload()) {
+			$image_data = $CI->upload->data();
 
-		$config = array(
-			'image_library'  => 'gd2',
-			'source_image'   => $image_data['full_path'],   
-			'new_image' 	 => APPPATH.'../'.URL_LOGO,
-			'maintain_ratio' => TRUE, 
-			'width' 		 => 150,
-			'height' 		 => 150
-		);
+			$config = array(
+				'image_library'  => 'gd2',
+				'source_image'   => $image_data['full_path'],   
+				'new_image' 	 => APPPATH.'../'.URL_LOGO,
+				'maintain_ratio' => TRUE, 
+				'width' 		 => 150,
+				'height' 		 => 150
+			);
 
-		$CI->load->library('image_lib', $config);
-		$CI->image_lib->resize();
+			$CI->load->library('image_lib', $config);
+			// if no errors returns the name of the created image
+			if ($CI->image_lib->resize()) {
+				return $image_data['file_name'];
+			} 
 
-		return $image_data['file_name'];
+			$CI->session->set_flashdata('error', $CI->image_lib->display_errors());
+		} 
+
+		$CI->session->set_flashdata('error', $CI->upload->display_errors());
 	}
 }

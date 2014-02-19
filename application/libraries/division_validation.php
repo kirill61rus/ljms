@@ -4,9 +4,9 @@
 	    /**
 	     * disivion data
 	     * @param division data 
-	     * @return TRUE or FALSE 
+	     * @return TRUE or FALSE this errors
 	     */
-		function set_validation_rules($logo_format_validation) {
+		function validate() {
 			$CI =& get_instance();
 			$CI->form_validation->set_rules('status', 'Status',  'required');	
 			$CI->form_validation->set_rules('name', 'Name',  'required|trim|max_length[30]');	
@@ -16,8 +16,6 @@
 			$CI->form_validation->set_rules('age_from', '',  '');	
 			$CI->form_validation->set_rules('description', '',  'trim');	
 			$CI->form_validation->set_rules('rules', '',  'trim');
-			$CI->form_validation->set_rules('userfile', 'Logo',  $logo_format_validation);		
-
 			if($CI->form_validation->run()) {
 				return TRUE;
 			} else{

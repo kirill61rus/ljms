@@ -12,6 +12,9 @@
 		<script type="text/javascript" src="<?=base_url();?>js/mass_action.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>js/roles.js"></script>
 		<script type="text/javascript">var base_url = '<?php echo base_url() ?>';</script>
+		<script type="text/javascript">
+       		var current_method = '<?php echo $this->router->class;  ?>';
+    	</script>
 		<!--[if IE 7]>
 			<link href="<?=base_url('style/ie7.css')?>" rel="stylesheet" type="text/css" />
 		<![endif]-->
