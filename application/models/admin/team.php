@@ -13,11 +13,16 @@ class Team extends CI_Model {
 	function get_list($num, $offset, $filter) {	
 
 		$this->db->join('divisions', 'divisions.id = teams.division_id', 'left')
+				 ->join('roles_to_users', 'roles_to_users.team_id = teams.id AND roles_to_users.role_id = 3', 'left')
+				 ->join('users', 'users.id = roles_to_users.user_id', 'left')
 				 ->join('leagues', 'leagues.id = teams.league_type_id', 'left')
+				 ->select('users.first_name as user_name')
+				 ->select('users.last_name as user_surname')
 				 ->select('teams.id')
  				 ->select('teams.name as team_name')
 				 ->select('divisions.name as division_name')
 				 ->select('leagues.name as league_name')
+				 ->order_by('teams.name')
 				 ->select('teams.status');
 
 		$this->team_filter($filter);

@@ -74,7 +74,7 @@
 						<label>Email *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('email'); ?>
+						<?php $id_email = 'id = "email"'; echo form_input('email', '', $id_email); ?>
 					</div>
 				</div>
 				<div class="hilf_width_col">
@@ -110,7 +110,7 @@
 						<label>Password *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('password'); ?>
+						<?php $id_password = 'id = "password"'; echo form_input('password', '', $id_password); ?>
 					</div>
 				</div>
 				<div class="hilf_width_col">

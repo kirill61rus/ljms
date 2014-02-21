@@ -87,14 +87,13 @@
 				<td class ="checkbox_col"><input data-item-id="<?php echo ($item['id']);?>" class="check_one" type="checkbox"></td>
 				<td  class="team_col"><p><?php echo htmlspecialchars($item['team_name']);?></p></td>
 				<td class="divis_col"><p><?php echo htmlspecialchars($item['division_name']);?></p></td>
-				<td class="coach_col"><p>COACH</p></td>
+				<td class="coach_col"><p><?php echo htmlspecialchars($item['user_name'].' '.$item['user_surname']);?></p></td>
 				<td class="wins_col"><p>0</p></td>
 				<td class="loses_col"><p>0</p></td>
 				<td class="ties_col"><p>0</p></td>
 				<td class="average_col"><p>0</p></td>
 				<td class="league_col"><p><?php echo htmlspecialchars($item['league_name']);?></p></td>
 				<td class="action_col">
-					<a class="button" href="<?=base_url('admin/team/add')?>">Assign players</a>
 					<a href="<?php echo base_url('admin/teams/edit').'?'.'id='.($item['id'])?>" class="edit"><img src="<?=base_url('images/edit.png')?>"></a>
 					<a href="#delete" data-item-id="<?php echo ($item['id']);?>" class="delete"><img src="<?=base_url('images/delete.png')?>"></a>
 				</td>
