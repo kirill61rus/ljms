@@ -19,6 +19,7 @@ class Divisions extends CI_Controller {
 		//create an array with informations about filtering
 		foreach($filter_names as $filter_name) {
 		 	$current_filter_name = $this->input->get($filter_name);
+
 		 	//if there is a filter add it to a string and array
 		 	if (strlen($current_filter_name)) {
 		 		$filter_data = $filter_data.$filter_name.'='.$current_filter_name.'&';
@@ -37,6 +38,7 @@ class Divisions extends CI_Controller {
 		} else {
 			$limit = 10;
 		}
+
 		// pagination configuration array
 		$config['page_query_string'] = TRUE;
 		$config['first_link'] = 'To start';
@@ -47,8 +49,10 @@ class Divisions extends CI_Controller {
 		$config['base_url'] = base_url('admin/divisions?limit='.$limit.'&'.$filter_data);
 		$config['query_string_segment'] = 'per_page';
 		$config['per_page'] = $limit; 
+
 		//initialize pagination
 		$this->pagination->initialize($config); 
+		
 		//add to array list of filtered divisions
 		$data['divisions'] = $this->division->get_list($config['per_page'], $this->input->get('per_page'), $data['filter']);
 		//add to array list of all divisions
@@ -96,9 +100,9 @@ class Divisions extends CI_Controller {
 			$division = $this->process_division_data();
 
 			$this->load->library('form_validation');
-			$this->load->library('division_validation');
+			$this->load->library('validation');
 			//check the validity of data
-			if($this->division_validation->validate()) {
+			if($this->validation->division_validate()) {
 				//processes the image and adds a link to an array
 				$division = $this->process_logo($division);
 				//add data to db if are valid
@@ -108,6 +112,7 @@ class Divisions extends CI_Controller {
 				redirect(base_url('admin/divisions/edit?id='.$division_id));
 			} 
 		} 
+		//if the form is not submitted or  data are not valid	
 		$this->load->view('admin/add_division');
 	}
 	/**
@@ -140,9 +145,9 @@ class Divisions extends CI_Controller {
 			$division = $this->process_division_data();
 			
 			$this->load->library('form_validation');
-			$this->load->library('division_validation');
+			$this->load->library('validation');
 			//check the validity of data
-			if($this->division_validation->validate()) {
+			if($this->validation->division_validate()) {
 				//processes the image and adds a link to an array
 				$division = $this->process_logo($division);
 				//if the data are valid update the db

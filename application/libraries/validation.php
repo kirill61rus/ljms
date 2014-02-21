@@ -1,12 +1,12 @@
 <?php if (!defined('BASEPATH')) exit('');
 
-	class Division_validation { 
+	class Validation { 
 	    /**
 	     * disivion data
 	     * @param division data 
 	     * @return TRUE or FALSE this errors
 	     */
-		function validate() {
+		function division_validate() {
 			$CI =& get_instance();
 			$CI->form_validation->set_rules('status', 'Status',  'required');	
 			$CI->form_validation->set_rules('name', 'Name',  'required|trim|max_length[30]');	
@@ -21,5 +21,20 @@
 			} else{
 				return FALSE;
 			}
+		}
+
+		function team_validate() {
+			$CI =& get_instance();
+			$CI->form_validation->set_rules('name', 'Name',  'required|trim|max_length[30]');	
+			$CI->form_validation->set_rules('division_id', 'Division',  'required');	
+			$CI->form_validation->set_rules('status', 'Status',  'required');	
+			$CI->form_validation->set_rules('league_type_id', 'League type',  'required');	
+			$CI->form_validation->set_rules('is_visitor', '',  '');	
+			if($CI->form_validation->run()) {
+				return TRUE;
+			} else{
+				return FALSE;
+			}
+
 		}
 	}

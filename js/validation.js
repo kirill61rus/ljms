@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+//division validation
     $("#add_division").validate({
 
        rules:{
@@ -29,15 +29,35 @@ $(document).ready(function(){
             }
         }
     });
-        $.validator.addMethod('age_validation',
-        function() {
-            var from = parseInt($("#age_from").val());
-            var to   = parseInt($("#age_to").val());
-            if (to<=from) {
-                    return  false;
-                } else {
-                    return  true;
-                }
-            },"Incorrect years interval!");
+//team validation
+    $("#add_team").validate({ 
+        rules:{
+            name:{
+                required: true,
+                maxlength: 30,
+            },
+            division_id:{
+                required: true,
+            },
+            status:{
+                required: true,
+            },
+            league_type_id:{
+                required: true,
+            },
+       },
+
+    });
+
+     $.validator.addMethod('age_validation',
+    function() {
+        var from = parseInt($("#age_from").val());
+        var to   = parseInt($("#age_to").val());
+        if (to<=from) {
+                return  false;
+            } else {
+                return  true;
+            }
+    },"Incorrect years interval!");
 
 });

@@ -82,7 +82,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach($divisions as $item) :?>
+		<?php foreach($teams as $item) :?>
 			<tr>
 				<td class ="checkbox_col"><input data-item-id="<?php echo ($item['id']);?>" class="check_one" type="checkbox"></td>
 				<td  class="team_col"><p><?php echo htmlspecialchars($item['team_name']);?></p></td>

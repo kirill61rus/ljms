@@ -29,26 +29,28 @@ if (validation_errors()){ echo '<div class="alert-error">'.validation_errors().'
 			<div class="form-group">
 				<div class="leftpart"><label>Ages From *</label></div>
 				<div class="rightpart"><?php $options = array(
-						'5'  => '5',
-						'6'  => '6',
-						'7'  => '7',
-						'8'  => '8',
-						'9'  => '9',
-						'10' => '10',
-						'11' => '11',
-						'12' => '12',
-						'13' => '13',
-						'14' => '14',
-						'15' => '15',
-						'16' => '16',
-						'17' => '17',
-						'18' => '18',
+						5  => 5,
+						6  => 6,
+						7  => 7,
+						8  => 8,
+						9  => 9,
+						10 => 10,
+						11 => 11,
+						12 => 12,
+						13 => 13,
+						14 => 14,
+						15 => 15,
+						16 => 16,
+						17 => 17,
+						18 => 18,
 						);
-					echo form_dropdown('age_from', $options, $division_data[0]['age_from']);
+					$age_from_id = 'id="age_from"';
+					echo form_dropdown('age_from', $options, $division_data[0]['age_from'], $age_from_id);
 					?> years  To *
 					<?php 
-					echo form_dropdown('age_to', $options, $division_data[0]['age_to']);
-					?> years
+					$age_to_id = 'id="age_to"';
+					echo form_dropdown('age_to', $options, $division_data[0]['age_to'], $age_to_id);
+					?>
 				</div>
 			</div>
 

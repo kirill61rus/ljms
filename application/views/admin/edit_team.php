@@ -2,13 +2,15 @@
 <?php $this->load->view('admin/include/admin_menu')?>
 <h2 class="title_admin">Edit Team</h2>
 	<?php 
+		$this->flash->show(); 
+		if (validation_errors()){ echo '<div class="alert-error">'.validation_errors().'</div>';}
 		$attributes = array('id' => 'add_team');
 		echo form_open_multipart('admin/teams/edit?id='.$this->input->get('id'), $attributes);
 	?>
 		<div class="add_form">
 			<div class="form-group">
 				<div class="leftpart"><label>Team Name *</label></div>
-				<div class="rightpart"><?php $value = $data['team_data'][0]['name']; echo form_input('name', $value); ?></div>
+				<div class="rightpart"><?php echo form_input('name', set_value('name',$data['team_data'][0]['name'])); ?></div>
 			</div>
 			<div class="form-group">
 				<div class="leftpart"><label>Division *</label></div>
@@ -19,12 +21,12 @@
 						$options[$item['id']] =  htmlspecialchars($item['name']);
 						endforeach;
 						$setting = 'class= "select_wide"';
-						echo form_dropdown('division_id', $options,  $data['team_data'][0]['division_id'], $setting);
+						echo form_dropdown('division_id', $options,  set_value('division_id',$data['team_data'][0]['division_id']), $setting);
 					?>
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="leftpart"><label>League Type</label></div>
+				<div class="leftpart"><label>League Type *</label></div>
 				<div class="rightpart">
 					<?php $options = array(
 							''  => 'Select',
@@ -32,7 +34,7 @@
 							'2' => 'Non conference Teams
 							',
 						);
-						echo form_dropdown('league_type_id', $options, $data['team_data'][0]['league_type_id'], $setting);
+						echo form_dropdown('league_type_id', $options, set_value('league_type_id',$data['team_data'][0]['league_type_id']), $setting);
 					?>
 
 				</div>
@@ -45,7 +47,7 @@
 							'1'    => 'Active',
 							'0' => 'Inactive',
 						);
-						echo form_dropdown('status', $options, $data['team_data'][0]['status'], $setting);
+						echo form_dropdown('status', $options, set_value('status',$data['team_data'][0]['status']), $setting);
 					?>
 				</div>
 			</div>
@@ -56,7 +58,7 @@
 							'0'    	=> 'No',
 							'1' 	=> 'Yes',
 						);
-						echo form_dropdown('is_visitor', $options, $data['team_data'][0]['is_visitor'], $setting);
+						echo form_dropdown('is_visitor', $options, set_value('is_visitor',$data['team_data'][0]['is_visitor']), $setting);
 					?>
 				</div>
 			</div>

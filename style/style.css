@@ -37,6 +37,9 @@ h2 {
 label {
 	display: block;
 }
+label.error{
+	color: red;
+}
 .text_center {
 	text-align: center;
 }
