@@ -157,7 +157,7 @@
 			<div class="form-group">
 				<div class="hilf_width_col">
 					<div class="hilf_width_col">
-						<label>Email</label>
+						<label>Alt Email</label>
 					</div>
 					<div class="hilf_width_col">
 						<?php $value = $user_data[0]['alt_email']; echo form_input('alt_email', $value); ?>

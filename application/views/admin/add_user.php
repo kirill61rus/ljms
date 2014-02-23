@@ -2,6 +2,7 @@
 <?php $this->load->view('admin/include/admin_menu')?>
 <h2 class="title_admin">Add System User</h2>
 	<?php 
+		if (validation_errors()){ echo '<div class="alert-error">'.validation_errors().'</div>';}
 		$attributes = array('id' => 'add_user');
 		echo form_open_multipart('admin/system_users/add', $attributes);
 	?>
@@ -13,7 +14,7 @@
 						<label>First Name *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('first_name'); ?>
+						<?php echo form_input('first_name', set_value('first_name')); ?>
 					</div>
 				</div>
 				<div class="hilf_width_col">
@@ -21,7 +22,7 @@
 						<label>Last Name *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('last_name'); ?>
+						<?php echo form_input('last_name', set_value('last_name')); ?>
 					</div>
 				</div>
 			</div>
@@ -31,7 +32,7 @@
 						<label>Address *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('address'); ?>
+						<?php echo form_input('address', set_value('address')); ?>
 					</div>
 				</div>
 				<div class="hilf_width_col">
@@ -39,7 +40,7 @@
 						<label>City *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('city'); ?>
+						<?php echo form_input('city', set_value('city')); ?>
 					</div>
 				</div>
 			</div>
@@ -55,7 +56,7 @@
 							foreach($states as $item) :
 								$options[$item['id']] =  $item['name'];
 							endforeach;
-							echo form_dropdown('state_id', $options, '',$setting);
+							echo form_dropdown('state_id', $options, set_value('state_id'), $setting);
 						?>
 					</div>
 				</div>
@@ -64,7 +65,7 @@
 						<label>Zipcode *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('zipcode'); ?>
+						<?php echo form_input('zipcode', set_value('zipcode')); ?>
 					</div>
 				</div>
 			</div>
@@ -74,7 +75,7 @@
 						<label>Email *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php $id_email = 'id = "email"'; echo form_input('email', '', $id_email); ?>
+						<?php $id_email = 'id = "email"'; echo form_input('email', set_value('email'), $id_email); ?>
 					</div>
 				</div>
 				<div class="hilf_width_col">
@@ -82,7 +83,7 @@
 						<label>Home Phone *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('home_phone'); ?>
+						<?php echo form_input('home_phone', set_value('home_phone')); ?>
 					</div>
 				</div>
 			</div>
@@ -92,7 +93,7 @@
 						<label>Email Confirm *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('repeat_email'); ?>
+						<?php echo form_input('repeat_email', set_value('repeat_email')); ?>
 					</div>
 				</div>
 				<div class="hilf_width_col">
@@ -100,7 +101,7 @@
 						<label>Cell Phone </label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('cell_phone'); ?>
+						<?php echo form_input('cell_phone', set_value('cell_phone')); ?>
 					</div>
 				</div>
 			</div>
@@ -118,7 +119,7 @@
 						<label>Alternitive Phone </label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('alt_phone'); ?>
+						<?php echo form_input('alt_phone', set_value('alt_phone')); ?>
 					</div>
 				</div>
 			</div>
@@ -141,7 +142,7 @@
 						<label>First Name</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('alt_first_name'); ?>
+						<?php echo form_input('alt_first_name', set_value('alt_first_name')); ?>
 					</div>
 				</div>
 				<div class="hilf_width_col">
@@ -149,17 +150,17 @@
 						<label>Last Name</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('alt_first_name'); ?>
+						<?php echo form_input('alt_last_name', set_value('alt_last_name')); ?>
 					</div>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="hilf_width_col">
 					<div class="hilf_width_col">
-						<label>Email</label>
+						<label>Alt Email</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('alt_email'); ?>
+						<?php echo form_input('alt_email', set_value('alt_email')); ?>
 					</div>
 				</div>
 				<div class="hilf_width_col">
@@ -167,7 +168,7 @@
 						<label>Alt Phone</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('alt_phone_2'); ?>
+						<?php echo form_input('alt_phone_2', set_value('alt_phone_2')); ?>
 					</div>
 				</div>
 			</div>

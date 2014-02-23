@@ -48,6 +48,7 @@ $(document).ready(function(){
        },
 
     });
+    //user validation
     $("#add_user").validate({ 
         rules:{
             first_name:{
@@ -72,16 +73,23 @@ $(document).ready(function(){
             email:{
                 required: true,
                  my_email_validation: true,
+                 remote : {
+                    url: base_url+"admin/system_users/email_jq_check",
+                    type: "post",
+                },
             },
             repeat_email:{
                  equalTo: "#email",
             },
             home_phone:{
                 required: true,
-                phoneUS: true,
+                my_phone_validation: true,
+            },
+            cell_phone:{
+                my_phone_validation: true,
             },
             alt_phone:{
-                phoneUS: true,
+                my_phone_validation: true,
             },
             password:{
                 required: true,
@@ -94,10 +102,14 @@ $(document).ready(function(){
                  my_email_validation: true,
             },
             alt_phone_2:{
-                phoneUS: true,
+                my_phone_validation: true,
             }
        },
-
+        messages:{
+            email:{
+                remote: "E-mail is busy",
+            },  
+        }, 
     });
     //own validation rule age
     $.validator.addMethod('age_validation',
@@ -122,5 +134,16 @@ $(document).ready(function(){
                 return  true;
             }
         },"Enter a valid email address!");
+    //own validation rule phone
+    $.validator.addMethod('my_phone_validation',
+        function(val,el)
+    {
+        var reg = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+        if (!reg.test(val)&&(val)) {
+                return  false;
+            } else {
+                return  true;
+            }
+        },"Enter a valid phone!");
 
 });

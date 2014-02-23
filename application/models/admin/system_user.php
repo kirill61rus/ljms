@@ -73,6 +73,12 @@ class System_user extends CI_Model {
 		return $this->db->delete('users'); 
 
 	}
+    function get_email_by_id($email) {
+        return $this->db->select('id')
+        				->where('email', $email)
+        				->get('users')
+        				->result_array();
+    }
 	function user_data($id) {
 		$this->db->where('id', $id);
 		return $this->db->get('users')->result_array();
@@ -81,5 +87,8 @@ class System_user extends CI_Model {
 		return $this->db->where('division_id', $id)
 						->select('id, name')
 						->get('teams')->result_array();
+	}
+    public static function encrypt_pass($pass) {
+    	return md5($pass);
 	}
 }
