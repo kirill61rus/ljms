@@ -37,7 +37,7 @@
 			}
 
 		}
-		function user_validate() {
+		function user_validate($callback_email_check) {
 			$CI =& get_instance();
 			$CI->form_validation->set_rules('first_name', 'First name',  'required|trim');
 			$CI->form_validation->set_rules('last_name', 'Last name',  'required|trim');
@@ -45,7 +45,7 @@
 			$CI->form_validation->set_rules('city', 'City',  'required|trim');
 			$CI->form_validation->set_rules('state_id', 'State',  'required');
 			$CI->form_validation->set_rules('zipcode', 'Zipcode',  'required|integer');
-			$CI->form_validation->set_rules('email', 'Email',  'required|valid_email|callback_email_check');
+			$CI->form_validation->set_rules('email', 'Email',  'required|valid_email|'.$callback_email_check);
 			$CI->form_validation->set_rules('repeat_email', 'Email Confirm',  'required|matches[email]');
 			$CI->form_validation->set_rules('home_phone', 'Home phone',  'required|callback_phone_check');
 			$CI->form_validation->set_rules('cell_phone', 'Cell phone',  'callback_phone_check');

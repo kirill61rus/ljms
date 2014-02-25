@@ -1,8 +1,8 @@
 <?php $this->load->view('admin/include/header')?>
 <?php $this->load->view('admin/include/admin_menu')?>
 <h2 class="title_admin">Edit System User</h2>
-    <?php $this->flash->show(); ?>
-	<?php 
+    <?php $this->flash->show(); 
+		if (validation_errors()){ echo '<div class="alert-error">'.validation_errors().'</div>';}
 		$attributes = array('id' => 'add_user');
 		echo form_open_multipart('admin/system_users/edit?id='.$this->input->get('id'), $attributes);
 	?>
@@ -14,7 +14,7 @@
 						<label>First Name *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php $value = $user_data[0]['first_name']; echo form_input('first_name', $value); ?>
+						<?php echo form_input('first_name', set_value('first_name', $user_data[0]['first_name'])); ?>
 					</div>
 				</div>
 				<div class="hilf_width_col">
@@ -22,7 +22,7 @@
 						<label>Last Name *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php $value = $user_data[0]['last_name']; echo form_input('last_name', $value); ?>
+						<?php echo form_input('last_name', set_value('last_name', $user_data[0]['last_name'])); ?>
 					</div>
 				</div>
 			</div>
@@ -32,7 +32,7 @@
 						<label>Address *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php $value = $user_data[0]['address']; echo form_input('address', $value); ?>
+						<?php echo form_input('address', set_value('address', $user_data[0]['address'])); ?>
 					</div>
 				</div>
 				<div class="hilf_width_col">
@@ -40,7 +40,7 @@
 						<label>City *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php $value = $user_data[0]['city']; echo form_input('city', $value); ?>
+						<?php echo form_input('city', set_value('city', $user_data[0]['city'])); ?>
 					</div>
 				</div>
 			</div>
@@ -56,7 +56,7 @@
 							foreach($states as $item) :
 								$options[$item['id']] =  $item['name'];
 							endforeach;
-							echo form_dropdown('state_id', $options, $user_data[0]['state_id'], $setting);
+							echo form_dropdown('state_id', $options, set_value('state_id', $user_data[0]['state_id']), $setting);
 						?>
 					</div>
 				</div>
@@ -65,7 +65,7 @@
 						<label>Zipcode *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php $value = $user_data[0]['zipcode']; echo form_input('zipcode', $value); ?>
+						<?php echo form_input('zipcode', set_value('zipcode', $user_data[0]['zipcode'])); ?>
 					</div>
 				</div>
 			</div>
@@ -75,7 +75,7 @@
 						<label>Email *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php $id_email = 'id = "email"'; $value = $user_data[0]['email']; echo form_input('email', $value, $id_email); ?>
+						<?php $id_email = 'id = "email"'; echo form_input('email', set_value('email', $user_data[0]['email']), $id_email); ?>
 					</div>
 				</div>
 				<div class="hilf_width_col">
@@ -83,7 +83,7 @@
 						<label>Home Phone *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php $value = $user_data[0]['home_phone']; echo form_input('home_phone', $value); ?>
+						<?php echo form_input('home_phone', set_value('home_phone', $user_data[0]['home_phone'])); ?>
 					</div>
 				</div>
 			</div>
@@ -101,7 +101,7 @@
 						<label>Cell Phone </label>
 					</div>
 					<div class="hilf_width_col">
-						<?php $value = $user_data[0]['cell_phone']; echo form_input('cell_phone', $value); ?>
+						<?php echo form_input('cell_phone', set_value('cell_phone', $user_data[0]['cell_phone'])); ?>
 					</div>
 				</div>
 			</div>
@@ -119,7 +119,7 @@
 						<label>Alternitive Phone </label>
 					</div>
 					<div class="hilf_width_col">
-						<?php $value = $user_data[0]['alt_phone']; echo form_input('alt_phone', $value); ?>
+						<?php echo form_input('alt_phone', set_value('alt_phone', $user_data[0]['alt_phone'])); ?>
 					</div>
 				</div>
 			</div>
@@ -142,7 +142,7 @@
 						<label>First Name</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php $value = $user_data[0]['alt_first_name']; echo form_input('alt_first_name', $value); ?>
+						<?php echo form_input('alt_first_name', set_value('alt_first_name', $user_data[0]['alt_first_name'])); ?>
 					</div>
 				</div>
 				<div class="hilf_width_col">
@@ -150,7 +150,7 @@
 						<label>Last Name</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php $value = $user_data[0]['alt_last_name']; echo form_input('alt_last_name', $value); ?>
+						<?php echo form_input('alt_last_name', set_value('alt_last_name', $user_data[0]['alt_last_name'])); ?>
 					</div>
 				</div>
 			</div>
@@ -160,7 +160,7 @@
 						<label>Alt Email</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php $value = $user_data[0]['alt_email']; echo form_input('alt_email', $value); ?>
+						<?php echo form_input('alt_email', set_value('alt_email', $user_data[0]['alt_email'])); ?>
 					</div>
 				</div>
 				<div class="hilf_width_col">
@@ -168,7 +168,7 @@
 						<label>Alt Phone</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php $value = $user_data[0]['alt_phone_2']; echo form_input('alt_phone_2', $value); ?>
+						<?php echo form_input('alt_phone_2', set_value('alt_phone_2', $user_data[0]['alt_phone_2'])); ?>
 					</div>
 				</div>
 			</div>

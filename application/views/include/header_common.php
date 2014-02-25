@@ -12,6 +12,7 @@
 		<script type="text/javascript" src="<?=base_url();?>js/mass_action.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>js/roles.js"></script>
 		<script type="text/javascript">var base_url = '<?php echo base_url() ?>';</script>
+		<script type="text/javascript">var get_id = "<?php if ($this->input->get('id')) { echo'?id='.$this->input->get('id');} ?>";</script>
 		<script type="text/javascript">
        		var current_method = '<?php echo $this->router->class;  ?>';
     	</script>

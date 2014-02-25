@@ -74,7 +74,7 @@ $(document).ready(function(){
                 required: true,
                  my_email_validation: true,
                  remote : {
-                    url: base_url+"admin/system_users/email_jq_check",
+                    url: base_url+"admin/system_users/email_jq_check"+get_id,
                     type: "post",
                 },
             },
@@ -107,7 +107,7 @@ $(document).ready(function(){
        },
         messages:{
             email:{
-                remote: "E-mail is busy",
+                remote: "Email is busy",
             },  
         }, 
     });

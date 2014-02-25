@@ -30,15 +30,19 @@ class System_user extends CI_Model {
     }
 	function get_list($num, $offset, $filter) {	
 
-
-		/*->join('divisions', 'divisions.id = teams.division_id', 'left')
-				 ->join('leagues', 'leagues.id = teams.league_type_id', 'left')
-*/
-		$this->db->select('users.last_name as last_name')
+		$this->db->join('roles_to_users', 'roles_to_users.user_id = users.id', 'left')
+				 ->join('roles', 'roles.id = roles_to_users.role_id', 'left')
+				 ->join('divisions', 'divisions.id = roles_to_users.division_id', 'left')
+				 ->join('teams', 'teams.id = roles_to_users.team_id', 'left')
+				 ->select('GROUP_CONCAT(roles.name SEPARATOR "|||") as role_name', false)
+				 ->select('GROUP_CONCAT(divisions.name SEPARATOR "|||") as division_name', false)
+				 ->select('GROUP_CONCAT(teams.name SEPARATOR "|||") as team_name', false)
+				 ->select('users.last_name as last_name')
 				 ->select('users.first_name as first_name')
 				 ->select('users.home_phone')
 				 ->select('users.email')
-				 ->select('users.id');
+				 ->select('users.id')
+				 ->group_by('users.id');
 
 		$this->users_filter($filter);
 

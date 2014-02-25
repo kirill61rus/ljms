@@ -1,12 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Teams extends CI_Controller {
+	
 	public function __construct() {
         parent::__construct();
 		$this->load->model('admin/division'); 
 		$this->load->model('admin/team'); 
 		if (!$this->session->userdata('id')) redirect(base_url('admin/auth'));
     }
+
 	/**
 	 * displays a table of teams
      * @param get this information about filtering

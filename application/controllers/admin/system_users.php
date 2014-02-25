@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class System_users extends CI_Controller {
+
 	public function __construct() {
         parent::__construct();
 		$this->load->model('admin/division');
@@ -9,11 +10,21 @@ class System_users extends CI_Controller {
 		$this->load->library('parser');
 		if (!$this->session->userdata('id')) redirect(base_url('admin/auth'));
     }
+
+	/**
+	 * displays a table of users
+     * @param get this information about filtering
+     * @return array this list of teams
+	*/
 	function index(){		
 		$filter_data = '';
 		$filter_names = array('division', 'role');
+
+		//create an array with informations about filtering
 		foreach($filter_names as $filter_name) {
 		 	$current_filter_name = $this->input->get($filter_name);
+
+		 	//if there is a filter add it to a string and array
 		 	if (strlen($current_filter_name)) {
 		 		$filter_data = $filter_data.$filter_name.'='.$current_filter_name.'&';
 		 		$data['filter'][$filter_name] = $current_filter_name;
@@ -22,13 +33,17 @@ class System_users extends CI_Controller {
 		 	}
 		}
 
+		// number of filtered rows
 		$config['total_rows'] = $this->system_user->count_filtered($data['filter']);
+
+		//determination  the numbers of shown  pages 
 		if ($limit = $this->input->get('limit')) { 
 			if ($limit == 'all') $limit = $config['total_rows'];
 		} else {
 			$limit = 10;
 		}
 
+		// pagination configuration array
 		$config['page_query_string'] = TRUE;
 		$config['first_link'] = 'To start';
 		$config['last_link'] = 'To end';
@@ -38,14 +53,27 @@ class System_users extends CI_Controller {
 		$config['base_url'] = base_url('admin/system_users?limit='.$limit.'&'.$filter_data);
 		$config['query_string_segment'] = 'per_page';
 		$config['per_page'] = $limit; 
+
+		//initialize pagination
 		$this->pagination->initialize($config); 
+		//add to array list of filtered teams 
 		$data['system_users'] = $this->system_user->get_list($config['per_page'], $this->input->get('per_page'), $data['filter']);
+		//add to array divisions list
 		$data['divisions'] = $this->division->names_list();
+		//add to array roles list
 		$data['roles'] = $this->system_user->roles_list();
+		//add to array number show pages
 		$data['limit'] = $limit;
+		//add to array filter information
 		$data['filter_data'] = $filter_data;
 		$this->load->view('admin/system_users', $data);
 	}
+
+	/**
+	 * performs mass action
+     * @param Post this the action and selected user id
+     * @return ...
+	*/
 	function action(){
 		switch($this->input->post('action')){
 			case 'delete':
@@ -66,6 +94,12 @@ class System_users extends CI_Controller {
 				break;		 
 		} 
 	}
+
+	/**
+	 * add user to db
+     * @param Post this user data
+     * @return error or success
+	*/
 	function add(){
 		// if form is submitted
 		if ($data = $this->input->post()) {
@@ -76,12 +110,13 @@ class System_users extends CI_Controller {
 			$this->load->library('form_validation');
 			$this->load->library('validation');
 
-
-
-			if($this->validation->user_validate()) {
+			//check the validity of data
+			if($this->validation->user_validate('callback_email_check')) {
 
 				//default status
 				$user['status'] = 1;
+
+				//encrypt password
 				$user['password'] = System_user::encrypt_pass($user['password']);
 
 				//adding a user to the database and save id to variable
@@ -124,48 +159,98 @@ class System_users extends CI_Controller {
 		$this->system_user->delete($this->input->post('id'));
 	}
 
+	/**
+	 * edit user data in db
+     * @param Post this user data, and Get this user id
+     * @return error or success
+	*/
 	function edit(){
-		if ($data = $this->input->post()) {
+		//loading user data
+		$data['user_data'] = $this->system_user->user_data($this->input->get('id'));
+		// if form is submitted
+		if ($this->input->post()) {
+
+			// generates an array of data to write to the database
 			$user = $this->process_user_data();
-			$this->system_user->edit($this->input->get('id'), $user);
-			$this->session->set_flashdata('item', 'Edit success');		
 
-			$data_role['user_id'] = $this->input->get('id');
-			$number_of_roles = count($this->input->post('role'));
-			$counter = 0;
+			$this->load->library('form_validation');
+			$this->load->library('validation');
 
-			//adding roles
-			if ($data['role'][0]) {
-				do {
-					$data_role['role_id'] = $data['role'][$counter];
-					$data_role['division_id'] = $data['div'][$counter];
-					$data_role['team_id'] = $data['team'][$counter];
-					if (count($this->roles->check_existence_role($data_role))){
-						$this->session->set_flashdata('error', 'Role already exists');
-					} else {
-						$this->roles->add($data_role);
-					}
-				} while (++$counter < $number_of_roles);
+			//if the email has been changed then it is necessary to check for uniqueness
+			if ($data['user_data'][0]['email'] == $this->input->post('email')){
+				$callback_email_check = '';
+			} else {
+				$callback_email_check = 'callback_email_check';
 			}
-			redirect(base_url('admin/system_users/edit?id='.$this->input->get('id')));
-		} else {
-			$data['divisions']		  = $this->division->names_list();
-			$data['roles']			  = $this->system_user->roles_list();
-			$data['states'] 		  = $this->system_user->states_list();
-			$data['user_data']  	  = $this->system_user->user_data($this->input->get()['id']);
-			$data['roles_by_user_id'] = $this->roles->roles_by_user_id($this->input->get('id'));
 
-			$this->load->view('admin/edit_user', $data);
+			//check the validity of data
+			if($this->validation->user_validate($callback_email_check)) {
+
+				//edit user data in db
+				$this->system_user->edit($this->input->get('id'), $user);
+				$this->session->set_flashdata('success', 'Edit user successfully');		
+
+				$data_role['user_id'] = $this->input->get('id');
+
+				//number assigned roles
+				$number_of_roles = count($this->input->post('role'));
+
+				//set the counter to zero
+				$counter = 0;
+
+				if ($data['role'][0]) {
+					do {
+
+						//create an array of datas role
+						$data_role['role_id'] = $data['role'][$counter];
+						$data_role['division_id'] = $data['div'][$counter];
+						$data_role['team_id'] = $data['team'][$counter];
+
+						//verify the existence of the role
+						if (count($this->roles->check_existence_role($data_role))){
+							$this->session->set_flashdata('error', 'Role already exists');
+						} else {
+
+							//if the role does not exist then add
+							$this->roles->add($data_role);
+						}
+					} while (++$counter < $number_of_roles);
+				}
+				redirect(base_url('admin/system_users/edit?id='.$this->input->get('id')));
+			}
 		}
+		$data['divisions']		  = $this->division->names_list();
+		$data['roles']			  = $this->system_user->roles_list();
+		$data['states'] 		  = $this->system_user->states_list();
+		$data['roles_by_user_id'] = $this->roles->roles_by_user_id($this->input->get('id'));
+		$this->load->view('admin/edit_user', $data);
 	}
+
+	/**
+	 * fetches teams relating to the division
+     * @param Post this division id
+     * @return json string this teams
+	*/
 	function get_teams_for_division_id(){
 		$division_id = $this->input->post('div_id');
 		$teams_in_division = $this->system_user->get_teams_for_division_id($division_id);
 		echo json_encode($teams_in_division);
 	}
+
+	/**
+	 * delete user role from db
+     * @param Post this role id
+     * @return ...
+	*/
 	function delete_role(){
 		$this->roles->delete($this->input->post('id'));
 	}
+
+	/**
+	 * generates an array of data to write to the database
+     * @param Post this user data
+     * @return array this user data
+	*/
 	private function process_user_data() {
 		$fields_names = ['first_name', 'last_name', 'address', 'city', 'state_id', 'zipcode', 'email', 'home_phone', 'cell_phone', 'alt_phone', 'password', 'alt_first_name', 'alt_last_name', 'alt_email', 'alt_phone_2'];
 		foreach($fields_names as $field) {
@@ -173,21 +258,22 @@ class System_users extends CI_Controller {
 		}
 		return $team;
 	}
+
 	/**
      * checks for a email in the database,
      * @param string $email
      * @return TRUE or FALSE and info  email is busy
      */
 	function email_check($str) {
-		if(!$this->system_user->get_email_by_id($str)) {
-			echo 'true';
+		$request_email = trim($str);
+		if(!$this->system_user->get_email_by_id($request_email)) {
 			return TRUE;
 		} else {
-			$this->form_validation->set_message('email_check', 'The email is busy');
-			echo 'false';
+			$this->form_validation->set_message('email_check', 'The Email is busy');
 			return FALSE;
 		}
 	}
+
     /**
      * checks for a email in the database,
      * @param string $email
@@ -195,12 +281,24 @@ class System_users extends CI_Controller {
      */
 	function email_jq_check(){
 		$request_email = trim($this->input->post('email'));
-		if($this->system_user->get_email_by_id($request_email)) {
-			echo 'false';
-		} else {
-			 echo 'true';
+		$id_from_db = $this->system_user->get_email_by_id($request_email);
+		//if edit user
+		if ($this->input->get('id')){
+			if ($id_from_db && $id_from_db[0]['id'] != $this->input->get('id')) {
+				echo 'false';
+			} else {
+				echo 'true';
+			}
+		//if add user			
+		} else {			
+			if($id_from_db) {
+				echo 'false';
+			} else {
+				 echo 'true';
+			}
 		}
 	}
+
 	/**
      * check phone for validate
      * @param string 
