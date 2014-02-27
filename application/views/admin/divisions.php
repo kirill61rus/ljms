@@ -83,7 +83,7 @@
 				<td class="divis_col"><p><?php echo htmlspecialchars($item['division_name']);?></p></td>
 				<td class="season_col"><p><?php echo (($item['fall_ball'] == 0 ? "Spring/Summer" : "Fall Ball"))?></p></td>
 				<td class="teams_col"><p><?php echo str_replace('|||', '</br>', htmlspecialchars($item['team_name']));?></p></td>
-				<td class="dir_col"><p><?php echo ($item['user_name']);?></p></td>
+				<td class="dir_col"><p><?php echo htmlspecialchars($item['user_name']);?></p></td>
 				<td class="action_col">
 				<a href="<?php echo base_url('admin/divisions/edit').'?'.'id='.($item['id'])?>" class="edit"><img src="<?=base_url('images/edit.png')?>"></a>
 				<a href="#delete" data-item-id="<?php echo ($item['id']);?>" data-item-page="divisions" class="delete"><img src="<?=base_url('images/delete.png')?>"></a>

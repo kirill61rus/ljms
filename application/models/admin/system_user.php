@@ -25,6 +25,7 @@ class System_user extends CI_Model {
 		    			->result_array();
     }
     function count_filtered($filter) {
+    	
     	$this->users_filter($filter);
     	return $this->db->count_all_results('users');
     }

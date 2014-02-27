@@ -34,7 +34,7 @@ class System_users extends CI_Controller {
 		}
 
 		// number of filtered rows
-		$config['total_rows'] = $this->system_user->count_filtered($data['filter']);
+		$config['total_rows'] = 30;//$this->system_user->count_filtered($data['filter']);
 
 		//determination  the numbers of shown  pages 
 		if ($limit = $this->input->get('limit')) { 
@@ -111,7 +111,7 @@ class System_users extends CI_Controller {
 			$this->load->library('validation');
 
 			//check the validity of data
-			if($this->validation->user_validate('callback_email_check')) {
+			if($this->validation->user_validate('callback_email_check', 'required')) {
 
 				//default status
 				$user['status'] = 1;
@@ -168,7 +168,7 @@ class System_users extends CI_Controller {
 		//loading user data
 		$data['user_data'] = $this->system_user->user_data($this->input->get('id'));
 		// if form is submitted
-		if ($this->input->post()) {
+		if ($data_post = $this->input->post()) {
 
 			// generates an array of data to write to the database
 			$user = $this->process_user_data();
@@ -184,10 +184,12 @@ class System_users extends CI_Controller {
 			}
 
 			//check the validity of data
-			if($this->validation->user_validate($callback_email_check)) {
+			if($this->validation->user_validate($callback_email_check, '')) {
 
+				//encrypt password
+				if ($user['password']) $user['password']= System_user::encrypt_pass($user['password']);
 				//edit user data in db
-				$this->system_user->edit($this->input->get('id'), $user);
+				$this->system_user->edit($this->input->get('id'), array_filter($user));
 				$this->session->set_flashdata('success', 'Edit user successfully');		
 
 				$data_role['user_id'] = $this->input->get('id');
@@ -198,13 +200,13 @@ class System_users extends CI_Controller {
 				//set the counter to zero
 				$counter = 0;
 
-				if ($data['role'][0]) {
+				if ($data_post['role'][0]) {
 					do {
 
 						//create an array of datas role
-						$data_role['role_id'] = $data['role'][$counter];
-						$data_role['division_id'] = $data['div'][$counter];
-						$data_role['team_id'] = $data['team'][$counter];
+						$data_role['role_id'] = $data_post['role'][$counter];
+						$data_role['division_id'] = $data_post['div'][$counter];
+						$data_role['team_id'] = $data_post['team'][$counter];
 
 						//verify the existence of the role
 						if (count($this->roles->check_existence_role($data_role))){

@@ -3,7 +3,7 @@
 <h2 class="title_admin">Edit System User</h2>
     <?php $this->flash->show(); 
 		if (validation_errors()){ echo '<div class="alert-error">'.validation_errors().'</div>';}
-		$attributes = array('id' => 'add_user');
+		$attributes = array('id' => 'add_user', 'autocomplete' => "off");
 		echo form_open_multipart('admin/system_users/edit?id='.$this->input->get('id'), $attributes);
 	?>
 		<div class="add_form">
@@ -93,7 +93,7 @@
 						<label>Email Confirm *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('repeat_email'); ?>
+						<?php echo form_input('repeat_email', set_value('email', $user_data[0]['email'])); ?>
 					</div>
 				</div>
 				<div class="hilf_width_col">
@@ -111,7 +111,7 @@
 						<label>Password *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php  $id_password = 'id = "password"'; echo form_input('password', '', $id_password); ?>
+						<?php  $id_password = 'id = "password"'; echo form_password('password', '', $id_password); ?>
 					</div>
 				</div>
 				<div class="hilf_width_col">
@@ -129,7 +129,7 @@
 						<label>Password Confirm*</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php  echo form_input('repassword'); ?>
+						<?php  echo form_password('repassword'); ?>
 					</div>
 				</div>				
 			</div>			
@@ -238,8 +238,8 @@
 							foreach($roles_by_user_id as $key => $value){
 								echo $this->parser->parse('admin/templates/role_block', [
 									'role_name' => $roles_by_user_id[$key]['role_name'],
-									'div_name' =>  $roles_by_user_id[$key]['division_name'],
-									'team_name' => $roles_by_user_id[$key]['team_name'],
+									'div_name' =>  htmlspecialchars($roles_by_user_id[$key]['division_name']),
+									'team_name' => htmlspecialchars($roles_by_user_id[$key]['team_name']),
 									'role_input' => '',
 									'div_input' => '',
 									'team_input' => '',	

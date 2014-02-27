@@ -111,7 +111,7 @@
 						<label>Password *</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php $id_password = 'id = "password"'; echo form_input('password', '', $id_password); ?>
+						<?php $id_password = 'id = "password"'; echo form_password('password', '', $id_password); ?>
 					</div>
 				</div>
 				<div class="hilf_width_col">
@@ -129,7 +129,7 @@
 						<label>Password Confirm*</label>
 					</div>
 					<div class="hilf_width_col">
-						<?php echo form_input('repassword'); ?>
+						<?php echo form_password('repassword'); ?>
 					</div>
 				</div>				
 			</div>			

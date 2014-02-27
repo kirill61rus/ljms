@@ -37,12 +37,12 @@
 			}
 
 		}
-		function user_validate($callback_email_check) {
+		function user_validate($callback_email_check, $required) {
 			$CI =& get_instance();
-			$CI->form_validation->set_rules('first_name', 'First name',  'required|trim');
-			$CI->form_validation->set_rules('last_name', 'Last name',  'required|trim');
+			$CI->form_validation->set_rules('first_name', 'First name',  'required|trim|max_length[30]');
+			$CI->form_validation->set_rules('last_name', 'Last name',  'required|trim|max_length[30]');
 			$CI->form_validation->set_rules('address', 'Address',  'required|trim');
-			$CI->form_validation->set_rules('city', 'City',  'required|trim');
+			$CI->form_validation->set_rules('city', 'City',  'required|trim|max_length[30]');
 			$CI->form_validation->set_rules('state_id', 'State',  'required');
 			$CI->form_validation->set_rules('zipcode', 'Zipcode',  'required|integer');
 			$CI->form_validation->set_rules('email', 'Email',  'required|valid_email|'.$callback_email_check);
@@ -50,8 +50,8 @@
 			$CI->form_validation->set_rules('home_phone', 'Home phone',  'required|callback_phone_check');
 			$CI->form_validation->set_rules('cell_phone', 'Cell phone',  'callback_phone_check');
 			$CI->form_validation->set_rules('alt_phone', 'Alternitive phone', 'callback_phone_check');
-			$CI->form_validation->set_rules('password', 'Password',  'required|min_length[6]');
-			$CI->form_validation->set_rules('repassword', 'Password confirm',  'required|matches[password]');
+			$CI->form_validation->set_rules('password', 'Password',  $required);
+			$CI->form_validation->set_rules('repassword', 'Password confirm',  'matches[password]|'.$required);
 			$CI->form_validation->set_rules('alt_email', 'Alt Email',  'valid_email');
 			$CI->form_validation->set_rules('alt_phone_2', 'Alt phone',  'callback_phone_check');
 			$CI->form_validation->set_rules('alt_first_name', 'Alt first name',  ''); 

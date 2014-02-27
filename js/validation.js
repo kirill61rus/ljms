@@ -1,5 +1,9 @@
 $(document).ready(function(){
 //division validation
+var required1 = true;
+if (get_id) {
+    required1 = false;
+}
     $("#add_division").validate({
 
        rules:{
@@ -53,15 +57,18 @@ $(document).ready(function(){
         rules:{
             first_name:{
                 required: true,
+                maxlength: 30,
             },
             last_name:{
                 required: true,
+                maxlength: 30,
             },
             address:{
                 required: true,
             },
             city:{
                 required: true,
+                maxlength: 30,
             },
             state_id:{
                 required: true,
@@ -92,10 +99,10 @@ $(document).ready(function(){
                 my_phone_validation: true,
             },
             password:{
-                required: true,
+                required: required1,
             },
             repassword:{
-                required: true,
+                required: required1,
                 equalTo: "#password",
             },
             alt_email:{

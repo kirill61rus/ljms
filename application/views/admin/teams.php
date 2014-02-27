@@ -87,7 +87,7 @@
 				<td class ="checkbox_col"><input data-item-id="<?php echo ($item['id']);?>" class="check_one" type="checkbox"></td>
 				<td  class="team_col"><p><?php echo htmlspecialchars($item['team_name']);?></p></td>
 				<td class="divis_col"><p><?php echo htmlspecialchars($item['division_name']);?></p></td>
-				<td class="coach_col"><p><?php echo htmlspecialchars($item['user_name'].' '.$item['user_surname']);?></p></td>
+				<td class="coach_col"><p><?php echo htmlspecialchars($item['user_name']).'</br>'.htmlspecialchars($item['user_surname']);?></p></td>
 				<td class="wins_col"><p>0</p></td>
 				<td class="loses_col"><p>0</p></td>
 				<td class="ties_col"><p>0</p></td>
