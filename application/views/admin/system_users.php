@@ -77,9 +77,13 @@
 				<td  class="team_col"><p><?php echo htmlspecialchars($item['last_name'].', '.$item['first_name']);?></p></td>
 				<td class="divis_col"><p><?php echo htmlspecialchars($item['home_phone']);?></p></td>
 				<td class="coach_col"><p><?php echo htmlspecialchars($item['email']);?></p></td>
-				<td class="wins_col"><p><?php echo str_replace('|||', '</br>', htmlspecialchars($item['role_name']));?></p></td>
-				<td class="loses_col"><p><?php echo str_replace('|||', '</br>', htmlspecialchars($item['division_name']));?></p></td>
-				<td class="ties_col"><p><?php echo str_replace('|||', '</br>', htmlspecialchars($item['team_name']));?></p></td>
+				<td class="wins_col"><p><?php echo str_replace('|||', '</br>', $item['role_name']);?></p></td>
+				<td class="loses_col"><p><?php if (substr_count($item['role_name'], 'Admin')) echo '</br>';  echo str_replace('|||', '</br>', htmlspecialchars($item['division_name']));?></p></td>
+				<td class="ties_col"><p><?php if (substr_count($item['role_name'], 'Admin')) echo '</br>'; 
+											for ($i = 1; $i <= substr_count($item['role_name'], 'Director'); $i++) {
+    											echo '</br>';
+											} 
+											echo str_replace('|||', '</br>', htmlspecialchars($item['team_name']));?></p></td>
 				<td class="action_col">
 					<a href="<?php echo base_url('admin/system_users/edit').'?'.'id='.($item['id'])?>" class="edit"><img src="<?=base_url('images/edit.png')?>"></a>
 					<a href="#delete" data-item-id="<?php echo ($item['id']);?>" class="delete"><img src="<?=base_url('images/delete.png')?>"></a>
