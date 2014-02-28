@@ -25,7 +25,7 @@ class System_user extends CI_Model {
 		    			->result_array();
     }
     function count_filtered($filter) {
-    	
+    	if ($filter['division'] || $filter['role'])  $this->db->join('roles_to_users', 'roles_to_users.user_id = users.id', 'left'); 	
     	$this->users_filter($filter);
     	return $this->db->count_all_results('users');
     }

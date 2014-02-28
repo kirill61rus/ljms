@@ -34,8 +34,7 @@ class System_users extends CI_Controller {
 		}
 
 		// number of filtered rows
-		$config['total_rows'] = 30;//$this->system_user->count_filtered($data['filter']);
-
+		$config['total_rows'] = $this->system_user->count_filtered($data['filter']);
 		//determination  the numbers of shown  pages 
 		if ($limit = $this->input->get('limit')) { 
 			if ($limit == 'all') $limit = $config['total_rows'];
