@@ -182,7 +182,7 @@
 					</div>
 					<div class="hilf_width_col">
 						<?php
-							$setting_rol = 'class= "select_wide control_button"';
+							$setting_rol = 'class= "select_wide roles_dd"';
 							$options_roles[''] =  'Select';
 							foreach($roles as $item) :
 								$options_roles[$item['id']] =  $item['name'];
@@ -199,7 +199,7 @@
 					</div>
 					<div class="hilf_width_col">
 						<?php
-							$setting_div = 'class="select_wide assign_division" disabled="disabled"';
+							$setting_div = 'class="select_wide divisions_dd" disabled="disabled"';
 							$options_div[''] =  'Select';
 							foreach($divisions as $item) :
 							$options_div[$item['id']] =  htmlspecialchars($item['name']);
@@ -214,7 +214,7 @@
 					</div>
 					<div class="hilf_width_col">
 						<?php
-							$setting_team = 'class="select_wide assign_team" disabled="disabled"';
+							$setting_team = 'class="select_wide teams_dd" disabled="disabled"';
 							$options_team[''] =  'Select';
 						echo form_dropdown('team', $options_team, '',$setting_team);
 						?>
@@ -238,7 +238,7 @@
 							foreach($roles_by_user_id as $key => $value){
 								echo $this->parser->parse('admin/templates/role_block', [
 									'role_name' => $roles_by_user_id[$key]['role_name'],
-									'div_name' =>  htmlspecialchars($roles_by_user_id[$key]['division_name']),
+									'division_name' =>  htmlspecialchars($roles_by_user_id[$key]['division_name']),
 									'team_name' => htmlspecialchars($roles_by_user_id[$key]['team_name']),
 									'role_input' => '',
 									'div_input' => '',
@@ -252,7 +252,7 @@
 							</table>
 					</tbody>
 				</table>
-				<a  class="inactive_button">Add Role</a>
+				<a class="add_role_btn">Add Role</a>
 			</div>
 		<div class="text_center">
 			<?php

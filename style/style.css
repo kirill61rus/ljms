@@ -233,23 +233,23 @@ label.error{
 	font-size: 12px;
 	padding: 0px 5px 0px 5px;
 }
-.active_button, .inactive_button {
+.add_role_btn {
 	border: 5px solid #660000;
 	text-decoration: none;
 	font-size: 13px;
 	padding: 0px 5px 0px 5px;
 	display: inline-block;
-	margin: 10px 0 10px 77px
-}
-.inactive_button {
+	margin: 10px 0 10px 77px;
 	border: 5px solid #CCC;
 	background: #CCC;
 	color: #000;
 	cursor: default;
 }
-.active_button {
+.active_btn {
+	border: 5px solid #660000;
 	color: #FFF;
 	background: #660000;
+	cursor: pointer;
 }
 /*-------Admin menu --------*/
 

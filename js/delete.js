@@ -1,6 +1,7 @@
 $(document).ready(function(){	
-//deletion recording from the database
-	$(document).on("click", "a[href='#delete']", function(e){
+
+	//deletion recording from the database
+	$("a[href='#delete']").click(function(e){
 		//stop the default action
 		e.preventDefault();
 		//if the action is confirmed
@@ -11,16 +12,16 @@ $(document).ready(function(){
 		 	//delete the item without rebooting
 		    $(this).parents("tr").animate({ opacity: "hide" }, "slow");
 	 	}
-	}); 
-//deletion logo
-		$(document).on("click", "a[href='#delete_logo']", function(e){
-			//stop the default action
-			e.preventDefault();
-			var division_id = $(this).data("item-id");
-			//sending a request to the controller
-			$.post(base_url+'admin/divisions/delete_logo', {division_id: division_id});
-			//delete image without rebooting
-			$(".logo").animate({ opacity: "hide" }, "slow");
-		}); 
+	});
 
+	//deletion logo
+	$("a[href='#delete_logo']").click(function(e){
+		//stop the default action
+		e.preventDefault();
+		var division_id = $(this).data("item-id");
+		//sending a request to the controller
+		$.post(base_url+'admin/divisions/delete_logo', {division_id: division_id});
+		//delete image without rebooting
+		$(".logo").fadeOut();
+	}); 
 });

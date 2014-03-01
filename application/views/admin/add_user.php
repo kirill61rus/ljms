@@ -3,7 +3,7 @@
 <h2 class="title_admin">Add System User</h2>
 	<?php 
 		if (validation_errors()){ echo '<div class="alert-error">'.validation_errors().'</div>';}
-		$attributes = array('id' => 'add_user');
+		$attributes = array('id' => 'add_user', 'autocomplete' => "off");
 		echo form_open_multipart('admin/system_users/add', $attributes);
 	?>
 		<div class="add_form">
@@ -182,7 +182,7 @@
 					</div>
 					<div class="hilf_width_col">
 						<?php
-							$setting_rol = 'class= "select_wide control_button"';
+							$setting_rol = 'class= "select_wide roles_dd"';
 							$options_roles[''] =  'Select';
 							foreach($roles as $item) :
 								$options_roles[$item['id']] =  $item['name'];
@@ -199,7 +199,7 @@
 					</div>
 					<div class="hilf_width_col">
 						<?php
-							$setting_div = 'class="select_wide assign_division" disabled="disabled"';
+							$setting_div = 'class="select_wide divisions_dd" disabled="disabled"';
 							$options_div[''] =  'Select';
 							foreach($divisions as $item) :
 							$options_div[$item['id']] =  htmlspecialchars($item['name']);
@@ -214,7 +214,7 @@
 					</div>
 					<div class="hilf_width_col">
 						<?php
-							$setting_team = 'class="select_wide assign_team" disabled="disabled"';
+							$setting_team = 'class="select_wide teams_dd" disabled="disabled"';
 							$options_team[''] =  'Select';
 						echo form_dropdown('team', $options_team, '',$setting_team);
 						?>
@@ -236,7 +236,7 @@
 					<tbody>
 					</tbody>
 				</table>
-				<a  class="inactive_button">Add Role</a>
+				<a class="add_role_btn">Add Role</a>
 			</div>
 		<div class="text_center">
 			<?php
