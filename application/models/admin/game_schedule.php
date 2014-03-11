@@ -1,7 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class System_user extends CI_Model {
+class Schedule_game extends CI_Model {
 
+    /**
+     * loads the divisionss from the database
+     * @return array  this divisions list
+     */
+    function names_list() {
+		return $this->db->select('name')
+						->select('id')
+		    			->get('divisions')
+		    			->result_array();
+    }
     function states_list() {
 		return $this->db->select('name')
 						->select('id')
@@ -15,7 +25,7 @@ class System_user extends CI_Model {
 		    			->result_array();
     }
     function count_filtered($filter) {
-    	if ($filter['division'] || $filter['role'])  $this->db->join('roles_to_users', 'roles_to_users.user_id = users.id', 'left'); 	
+
     	$this->users_filter($filter);
     	return $this->db->count_all_results('users');
     }
@@ -44,9 +54,6 @@ class System_user extends CI_Model {
 	function users_filter($filter) {
 		if(strlen($filter['division'])){
 			$this->db->where('roles_to_users.division_id', $filter['division']);
-		}
-		if(strlen($filter['role'])){
-			$this->db->where('roles_to_users.role_id', $filter['role']);
 		}
 	}
 	function update_status($data) {
@@ -77,6 +84,11 @@ class System_user extends CI_Model {
 	function user_data($id) {
 		$this->db->where('id', $id);
 		return $this->db->get('users')->result_array();
+	}
+	function get_teams_for_division_id($id){
+		return $this->db->where('division_id', $id)
+						->select('id, name')
+						->get('teams')->result_array();
 	}
     public static function encrypt_pass($pass) {
     	return md5($pass);

@@ -12,10 +12,12 @@ class Division extends CI_Model {
 		    			->get('divisions')
 		    			->result_array();
     }
+
     function count_filtered($filter) {
     	$this->division_filter($filter);
     	return $this->db->count_all_results('divisions');
     }
+
 	function get_list($num, $offset, $filter) {	
 		$this->db->join('teams', 'teams.division_id = divisions.id', 'left')
 				 ->join('roles_to_users', 'roles_to_users.division_id = divisions.id AND roles_to_users.role_id = 2', 'left')
@@ -45,14 +47,17 @@ class Division extends CI_Model {
 			$this->db->where('divisions.fall_ball', $filter['season']);
 		}
 	}
+
 	function update_status($data) {
 		$this->db->where_in('id', $data['id']);
 		 $this->db->update('divisions', $data['status']);
 	}
+
 	function add($data) {
 		$this->db->insert('divisions', $data);
 		return $this->db->insert_id();
 	}
+
 	function edit($id, $data) {
 		$this->db->where('id', $id);
 		 $this->db->update('divisions', $data);
@@ -64,11 +69,13 @@ class Division extends CI_Model {
 		return $this->db->delete('divisions'); 
 
 	}
+	
 	function delete_logo($id) {
 		$division['logo'] = '';
 		$this->db->where('id', $id)
 				 ->update('divisions', $division); 
 	}
+
 	function get_division_data_by_id($id) {
 		$this->db->where('id', $id);
 		return $this->db->get('divisions')->result_array();

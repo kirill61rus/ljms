@@ -118,6 +118,46 @@ if (get_id) {
             },  
         }, 
     });
+    // game result validation
+    $("#add_results").validate({ 
+           rules:{
+            home_team_result:{
+                required: true,
+                digits : true,
+            },
+            visitor_team_result:{
+                required: true,
+                digits : true,
+            },
+        },
+    });
+
+    //game validation
+    $("#add_game").validate({
+         rules:{
+            date:{
+                required: true,
+                date_validation: true,
+            },
+            time:{
+                required: true,
+            },
+            division_id:{
+                required: true,
+            },
+            home_team_id:{
+                 home_dd_team: true,
+            },
+            visitor_team_id:{
+                visitor_dd_team: true,
+            },
+            location_id:{
+                required: true,
+            },
+       },
+
+    });
+
     //own validation rule age
     $.validator.addMethod('age_validation',
     function() {
@@ -153,4 +193,45 @@ if (get_id) {
             }
         },"Enter a valid phone!");
 
+     //own validation rule age
+    $.validator.addMethod('home_dd_team',
+    function() {
+        var home_team = parseInt($("#home_team").val());
+        if (home_team) {
+                return  true;
+            } else {
+                return  false;
+            }
+    },"This field is required.");
+
+    $.validator.addMethod('visitor_dd_team',
+    function() {
+        var visitor_team = parseInt($("#visitor_team").val());
+        if (visitor_team) {
+                return  true;
+            } else {
+                return  false;
+            }
+    },"This field is required.");
+
+
+
+
+    $.validator.addMethod('date_validation',
+    function() {
+
+        var myDate = $("#date").val();
+        myDate=myDate.split("/");
+        var newDate=myDate[0]+"/"+myDate[1]+"/"+myDate[2];
+        var time = (new Date(newDate).getTime());
+
+        var now = new Date();
+        var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+        if (time && (time >= today)) {
+                return  true;
+            } else {
+                return  false;
+            }
+    },"Incorrect date.");
 });

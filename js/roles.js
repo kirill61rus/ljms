@@ -1,6 +1,6 @@
 $(document).ready(function() {
-
-    $( ".divisions_dd" ).change(function() {
+    
+    $(".divisions_dd").change(function() {
         var division_id = $(this).val();
 
         var role_id = $(".roles_dd").val();
@@ -27,7 +27,7 @@ $(document).ready(function() {
         }) 
     });
 
-    $( ".teams_dd" ).change(function() {
+    $(".teams_dd").change(function() {
          var team_id = $(this).val();
          if (team_id) {
             $(".add_role_btn").addClass('active_btn');

@@ -7,6 +7,7 @@ class System_users extends CI_Controller {
 		$this->load->model('admin/division');
 		$this->load->model('admin/system_user');
 		$this->load->model('admin/roles');
+		$this->load->model('admin/additional_requests');
 		$this->load->library('parser');
 		if (!$this->session->userdata('id')) redirect(base_url('admin/auth'));
     }
@@ -234,7 +235,7 @@ class System_users extends CI_Controller {
 	*/
 	function get_teams_for_division_id(){
 		$division_id = $this->input->post('div_id');
-		$teams_in_division = $this->system_user->get_teams_for_division_id($division_id);
+		$teams_in_division = $this->additional_requests->get_teams_for_division_id($division_id);
 		echo json_encode($teams_in_division);
 	}
 

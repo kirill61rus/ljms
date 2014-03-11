@@ -7,12 +7,20 @@
 		<script type="text/javascript" src="<?=base_url();?>js/libraries/jquery-1.10.2.min.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>js/libraries/jquery.validate.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>js/delete.js"></script>
+		<script type="text/javascript" src="<?=base_url();?>js/calendar.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>js/validation.js"></script>
 		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>js/mass_action.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>js/roles.js"></script>
+		<script type="text/javascript" src="<?=base_url();?>js/teams_for_division.js"></script>
 		<script type="text/javascript">var base_url = '<?php echo base_url() ?>';</script>
 		<script type="text/javascript">var get_id = "<?php if ($this->input->get('id')) { echo'?id='.$this->input->get('id');} ?>";</script>
+
+		<!--for date form -->
+		<link rel="stylesheet" href="<?=base_url('style/jquery.datepick.css')?>">
+		<script src="<?=base_url();?>js/libraries/jquery.datepick.js"></script>
+		<script src="<?=base_url();?>js/libraries/jquery.mask.min.js"></script>
+
 		<script type="text/javascript">
        		var current_method = '<?php echo $this->router->class;  ?>';
     	</script>

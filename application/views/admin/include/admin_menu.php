@@ -5,7 +5,7 @@
 		<li><a class="inactiv_link">Players</a></li>
 		<li><a href="<?=base_url('admin/divisions')?>">Divisions</a></li>
 		<li><a href="<?=base_url('admin/teams')?>">Teams</a></li>
-		<li><a class="inactiv_link">Game schedule</a></li>
+		<li><a href="<?=base_url('admin/game_schedule')?>">Game schedule</a></li>
 		<li><a class="inactiv_link">Volunteer Duties</a></li>
 		<li><a class="inactiv_link">Fundraiser</a></li>
 		<li><a class="inactiv_link">Sponsors</a></li>

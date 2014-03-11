@@ -4,12 +4,20 @@ class Team extends CI_Model {
 
     /**
      * loads the divisionss from the database
-     * @return array  this divisions list
+     * @return array  this teams list
      */
+    function names_list() {
+		return $this->db->select('name')
+						->select('id')
+		    			->get('teams')
+		    			->result_array();
+    }
+
     function count_filtered($filter) {
     	$this->team_filter($filter);
     	return $this->db->count_all_results('teams');
     }
+
 	function get_list($num, $offset, $filter) {	
 
 		$this->db->join('divisions', 'divisions.id = teams.division_id', 'left')
@@ -42,14 +50,17 @@ class Team extends CI_Model {
 			$this->db->where('teams.status', $filter['status']);
 		}
 	}
+
 	function update_status($data) {
 		$this->db->where_in('id', $data['id']);
 		 $this->db->update('teams', $data['status']);
 	}
+
 	function add($data) {
 		$this->db->insert('teams', $data);
 		return $this->db->insert_id();
 	}
+
 	function edit($id, $data) {
 		$this->db->where('id', $id);
 		 $this->db->update('teams', $data);
@@ -61,11 +72,7 @@ class Team extends CI_Model {
 		return $this->db->delete('teams'); 
 
 	}
-	function delete_logo($id) {
-		$division['logo'] = '';
-		$this->db->where('id', $id)
-				 ->update('divisions', $division); 
-	}
+	
 	function team_data($id) {
 		$this->db->where('id', $id);
 		return $this->db->get('teams')->result_array();
