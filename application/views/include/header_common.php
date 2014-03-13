@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
 		<link href="<?=base_url('style/reset.css')?>" rel="stylesheet" type="text/css" />
 		<link href="<?=base_url('style/style.css')?>" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="<?=base_url();?>js/libraries/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="<?=base_url();?>js/libraries/jquery-1.9.1.min.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>js/libraries/jquery.validate.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>js/delete.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>js/calendar.js"></script>
@@ -17,9 +17,17 @@
 		<script type="text/javascript">var get_id = "<?php if ($this->input->get('id')) { echo'?id='.$this->input->get('id');} ?>";</script>
 
 		<!--for date form -->
+	    <link rel="stylesheet" href="<?=base_url('style/jquery-ui.css')?>">
+		<script src="<?=base_url();?>js/libraries/jquery-ui.js"></script>
+
+
 		<link rel="stylesheet" href="<?=base_url('style/jquery.datepick.css')?>">
 		<script src="<?=base_url();?>js/libraries/jquery.datepick.js"></script>
 		<script src="<?=base_url();?>js/libraries/jquery.mask.min.js"></script>
+
+
+
+
 
 		<script type="text/javascript">
        		var current_method = '<?php echo $this->router->class;  ?>';

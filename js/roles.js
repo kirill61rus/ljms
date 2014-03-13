@@ -76,7 +76,7 @@ $(document).ready(function() {
         template_data.division_name = $('.divisions_dd option:selected').html();
 
         template_data.team_id   = $('.teams_dd').val();
-        template_data.team_name = $('.divisions_dd option:selected').html();
+        template_data.team_name = $('.teams_dd option:selected').html();
 
         if ($(".teams_dd").prop("disabled")){
             template_data.team_name = ''; 
@@ -103,8 +103,7 @@ $(document).ready(function() {
     $(document).on("click", "a[href='#delete_role']", function(e){
         e.preventDefault();
         if(confirm('Are you sure want to delete this role?')){
-            var role_id = $(this).data("role-id");
-
+            var role_id = $(this).data("item-id");
             if (role_id) {
                 $.post(base_url+'admin/system_users/delete_role', {id: role_id});
             }

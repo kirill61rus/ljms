@@ -1,30 +1,21 @@
 $(document).ready(function() {
 
-//Запрос и получение дат новостей за месяц соответствующего года
     function requestData (month, year){
             $.ajax({
+                    async: false,
                     type: "GET",
-                    url: "cal_req.php",
                     dataType: "json",
-                    data: "year="+year+"&month="+month,
-                    //делаем вместо асинхронного запроса, синхронный. 
-                    //Иначе функция отключения дней disableAllTheseDays 
-                    //не успевает получит данные с сервера.
-                    //Увы, как мне кажется, проблемное место,
-                    //не рекомендуют этого делать.
-                    async:false,  
+                    url: base_url+"calendar/get_dates",
+                    data: "year="+year+"&month="+month, 
                     success: function (msg){ undisabledDays=msg; }
             });
     }
- 
 //Функция отключеня дней без статей, на календаре,
-//вызывается для каждого дня
     function disableAllTheseDays(date) {
-            date = $.datepicker.formatDate('yy-mm-dd', date);
-            return [$.inArray(date, undisabledDays) !=-1];
+            var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+            return [$.inArray(string, undisabledDays) !=-1];
       }
-//Функция загрузки дат новостей для текущего месяца
-//(при первичной загрузке календаря)    
+//Функция загрузки дат новостей для текущего месяца   
     function loadCurrentPosts() {
         var curDate = new Date();
         var month = curDate.getMonth();
@@ -33,31 +24,24 @@ $(document).ready(function() {
             requestData(month, year);
     }
 //Функция загрузки дат новостей при переходе на следующий,
-//(предыдущий) месяц.
     function loadIdPost(year, month){ requestData(month, year); }     
-       
-//Сам Datepicker    
-    $('#datepickerevent').datepick({
+           
+    $('#datepickerevent').datepicker({
     //перед загрузкой календаря получаем даты новостей для
-   //текущего месяца
         beforeShow: loadCurrentPosts(),
     //выставляем удобный формат даты календаря, для передачи на сервер
         dateFormat: 'yy-mm-dd',
-    //перед показом даты проверяем есть новости к дате или нет,
-    //если нет то отключаем дату.
-    //выполняется каждый раз при прорисовки календаря
-    //(изменение месяца, обновление страницы). 
+    //перед показом даты проверяем есть новости к дате или нет, 
         beforeShowDay:  disableAllTheseDays, 
     //при изменении месяца получаем даты новостей для него
         onChangeMonthYear:  function(year, month, inst) {
                                     loadIdPost(year, month)},
     //при выборе даты, в данном случае открываем страницу
-    //с новостями за этот день
         onSelect: function(date)
                         {
-                        var links="arhiv2.php?dates=";
+                        var links="calendar?dates=";
                         window.location.href = links+date;
                         }
           
     }); 
-});
+}); 
