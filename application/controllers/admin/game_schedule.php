@@ -160,20 +160,20 @@ class Game_schedule extends CI_Controller {
 	function action(){
 		switch($this->input->post('action')){
 			case 'delete':
-				$this->system_user->delete($this->input->post('system_user_ids'));
-	  			redirect(base_url('admin/system_users'));
+				$this->schedule_game->delete($this->input->post('game_schedul_ids'));
+	  			redirect(base_url('admin/game_schedule'));
 	  			break;
 			case 'active':
-				$data['id'] = $this->input->post('system_user_ids');
+				$data['id'] = $this->input->post('game_schedul_ids');
 				$data['status']['status'] = '1';
-				$this->system_user->update_status($data);
-	  			redirect(base_url('admin/system_users'));
+				$this->schedule_game->update_status($data);
+	  			redirect(base_url('admin/game_schedule'));
 	  			break;
 			case 'inactive':
-				$data['id'] = $this->input->post('system_user_ids');
+				$data['id'] = $this->input->post('game_schedul_ids');
 				$data['status']['status'] = '0';
-				$this->system_user->update_status($data);
-	  			redirect(base_url('admin/system_users'));
+				$this->schedule_game->update_status($data);
+	  			redirect(base_url('admin/game_schedule'));
 				break;		 
 		} 
 	}

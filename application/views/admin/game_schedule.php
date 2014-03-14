@@ -93,7 +93,7 @@
 			<tr>
 				<td class ="checkbox_col"><input data-item-id="<?php echo ($item['id']);?>" class="check_one" type="checkbox"></td>
 				<td><p><?php echo date('l', strtotime($item['date'])).'</br>'.date('n/j/Y', strtotime($item['date']))?></p></td>
-				<td><p><?php echo date('h:i', strtotime($item['time']));?></p></td>
+				<td><p><?php echo date('H:i', strtotime($item['time']));?></p></td>
 				<td><p><?php echo htmlspecialchars($item['division_name'])?></p></td>
 				<td><p><?php echo htmlspecialchars($item['home_team_name'])."</br>(".$item['home_team_result'].")"?></p></td>
 				<td><p><?php echo htmlspecialchars($item['visitor_team_name'])."</br>(".$item['visitor_team_result'].")";?></p></td>

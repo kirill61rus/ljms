@@ -211,7 +211,7 @@ label.error{
 }
 #base p {
 	margin-bottom: 10px;
-	font-size: 12px;
+	font-size: 11px;
 	line-height: 18px;
 }
 
@@ -262,10 +262,6 @@ label.error{
 	color: #FFF;
 	background: #660000;
 	cursor: pointer;
-}
-.full_width_table tbody p{
-	font-size: 12px;
-	color: #000;
 }
 /*-------Admin menu --------*/
 
@@ -370,7 +366,10 @@ label.error{
 	margin: auto;
 	margin-top: 30px;
 }
-
+.full_width_table tbody p{
+	font-size: 12px;
+	color: #000;
+}
 .full_width_table thead tr {
 	height: 30px;
 }
@@ -392,6 +391,12 @@ label.error{
 .full_width_table tbody p {
 	padding: 10px 0px 10px 0px;
 	font-weight: normal;
+}
+.full_width_table.schedule_for_date{
+	width: 470px;
+}
+.full_width_table.schedule_for_date p{
+	padding-left: 5px;
 }
 .checkbox_col {
 	width: 4%;

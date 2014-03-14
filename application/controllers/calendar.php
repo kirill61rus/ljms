@@ -4,13 +4,14 @@ class Calendar extends CI_Controller {
 	public function __construct() {
         parent::__construct();
         $this->load->model('admin/additional_requests');
+        $this->load->model('admin/schedule_game');
     }
 
     function index(){
     	$data['date'] = $this->input->get('dates');
-    	$this->load->view('calendar', array('data' => $data));
+    	$data['schedule'] = $this->schedule_game->game_by_date($data['date']);
+    	$this->load->view('calendar', $data);
     }
-
 
 
     function get_dates(){
