@@ -6,7 +6,7 @@
 </div>
 	<?php 
 		$attributes = array('id' => 'filter',  'method' => 'get');
-		echo form_open_multipart('admin/system_users/', $attributes);
+		echo form_open_multipart('admin/game_schedule/', $attributes);
 	?>
 <div class="filter">
 	<form>
@@ -39,8 +39,8 @@
 		Date:
 		<?php $options_date = array(
 			''  => 'All',
-			'1'    => 'Future games',
-			'2' => 'Prev game',
+			'future'    => 'Future games',
+			'prev' => 'Prev game',
 		);
 		echo form_dropdown('date', $options_date, $filter['date'], $setting);
 		?>
@@ -100,7 +100,7 @@
 				<td><p><?php echo (($item['practice'])==1) ? 'YES': 'NO';?></p></td>
 				<td><p><?php echo htmlspecialchars($item['location_name'])?></p></td>
 				<td class="action_col">
-					<a class="button" href="<?=base_url('admin/game_schedule/results').'?'.'id='.($item['id'])?>"">Results</a>
+					<a class="button" href="<?=base_url('admin/game_schedule/results').'?'.'id='.($item['id'])?>">Results</a>
 					<a href="<?php echo base_url('admin/game_schedule/edit').'?'.'id='.($item['id'])?>" class="edit"><img src="<?=base_url('images/edit.png')?>"></a>
 			</tr> 
 		<?php endforeach;?>

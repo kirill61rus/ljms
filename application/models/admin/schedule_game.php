@@ -8,7 +8,11 @@ class Schedule_game extends CI_Model {
      */
 
     function count_filtered($filter) {
-    	//$this->users_filter($filter);
+    	if (strlen($filter['league']))  {
+    		$this->db->join('teams as home_teams', 'game_schedule.home_team_id = home_teams.id', 'left'); 
+    		$this->db->join('teams as visitor_teams', 'game_schedule.visitor_team_id = visitor_teams.id', 'left'); 
+    	}
+    	$this->games_filter($filter);
     	return $this->db->count_all_results('game_schedule');
     }
 
@@ -33,15 +37,31 @@ class Schedule_game extends CI_Model {
 				 ->select('location.name as location_name')
 				 ->group_by('game_schedule.id');
 
-		return $this->db->get('game_schedule')
+		$this->games_filter($filter);
+
+		return $this->db->get('game_schedule', $num, $offset)
 						->result_array();
 	}
 
-	/*function users_filter($filter) {
+	function games_filter($filter) {
 		if(strlen($filter['division'])){
-			$this->db->where('roles_to_users.division_id', $filter['division']);
+			$this->db->where('game_schedule.division_id', $filter['division']);
 		}
-	}*/
+		if(strlen($filter['team'])){
+			$this->db->where('game_schedule.home_team_id', $filter['team']);
+			$this->db->or_where('game_schedule.visitor_team_id', $filter['team']); 
+		}
+		if(strlen($filter['league'])){			
+    		$this->db->where('home_teams.league_type_id', $filter['league']);
+    		$this->db->or_where('visitor_teams.league_type_id', $filter['league']);
+		}
+		if($filter['date'] == 'future'){			
+    		$this->db->where("DATE_FORMAT(date,'%Y-%m-%d')>=", date('Y-m-d'));
+		} elseif ($filter['date'] == 'prev') {
+			$this->db->where("DATE_FORMAT(date,'%Y-%m-%d')<", date('Y-m-d'));
+		}
+	}
+
 	function teams_by_id_game($id) {
 		$this->db->join('teams as home_teams', 'game_schedule.home_team_id = home_teams.id', 'left')
 				 ->join('teams as visitor_teams', 'game_schedule.visitor_team_id = visitor_teams.id', 'left')

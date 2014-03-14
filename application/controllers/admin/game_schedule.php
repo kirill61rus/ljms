@@ -51,7 +51,7 @@ class Game_schedule extends CI_Controller {
 		$config['next_link'] = 'next';
 		$config['prev_link'] = 'previous';
 		$config['uri_segment'] = 4;
-		$config['base_url'] = base_url('admin/system_users?limit='.$limit.'&'.$filter_data);
+		$config['base_url'] = base_url('admin/game_schedule?limit='.$limit.'&'.$filter_data);
 		$config['query_string_segment'] = 'per_page';
 		$config['per_page'] = $limit; 
 

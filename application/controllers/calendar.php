@@ -7,7 +7,8 @@ class Calendar extends CI_Controller {
     }
 
     function index(){
-    	echo "55";
+    	$data['date'] = $this->input->get('dates');
+    	$this->load->view('calendar', array('data' => $data));
     }
 
 
