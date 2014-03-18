@@ -31,6 +31,7 @@ class System_user extends CI_Model {
 				 ->select('users.last_name as last_name')
 				 ->select('users.first_name as first_name')
 				 ->select('users.home_phone')
+				 ->select('users.status')
 				 ->select('users.email')
 				 ->select('users.id')
 				 ->group_by('users.id');

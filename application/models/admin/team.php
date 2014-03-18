@@ -27,6 +27,7 @@ class Team extends CI_Model {
 				 ->select('users.first_name as user_name')
 				 ->select('users.last_name as user_surname')
 				 ->select('teams.id')
+				 ->select('teams.status')
  				 ->select('teams.name as team_name')
 				 ->select('divisions.name as division_name')
 				 ->select('leagues.name as league_name')
@@ -49,6 +50,20 @@ class Team extends CI_Model {
 		if(strlen($filter['status'])){
 			$this->db->where('teams.status', $filter['status']);
 		}
+	}
+	function get_ljms_team($id) {
+		$where = "division_id = $id AND league_type_id = 1";
+		$this->db->where($where)
+				 ->select('name');
+		return $this->db->get('teams')
+			    		->result_array();
+	}
+	function get_non_conference_teams($id) {
+				$where = "division_id = $id AND league_type_id = 2";
+		$this->db->where($where)
+				 ->select('name');
+		return $this->db->get('teams')
+			    		->result_array();
 	}
 
 	function update_status($data) {

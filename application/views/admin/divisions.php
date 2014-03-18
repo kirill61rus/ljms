@@ -78,7 +78,7 @@
 	</thead>
 	<tbody>
 		<?php foreach($divisions as $item) :?>
-			<tr>
+			<tr <?php if ($item['status'] == 0) echo 'class="inactive"'; ?>>
 				<td class ="checkbox_col"><input data-item-id="<?php echo ($item['id']);?>" class="check_one" type="checkbox"></td>
 				<td class="divis_col"><p><?php echo htmlspecialchars($item['division_name']);?></p></td>
 				<td class="season_col"><p><?php echo (($item['fall_ball'] == 0 ? "Spring/Summer" : "Fall Ball"))?></p></td>

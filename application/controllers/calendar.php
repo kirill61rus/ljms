@@ -5,6 +5,8 @@ class Calendar extends CI_Controller {
         parent::__construct();
         $this->load->model('admin/additional_requests');
         $this->load->model('admin/schedule_game');
+        $this->load->model('admin/division'); 
+        $this->load->model('admin/team');
     }
 
     function index(){
@@ -39,4 +41,21 @@ class Calendar extends CI_Controller {
 	    }
 
     }
+    function division(){
+    	$id = $this->input->get('id');
+    	$data['division_data'] = $this->division->all_about($id);
+    	$data['ljms_team'] = $this->team->get_ljms_team($id);
+    	$data['non_conference_team'] = $this->team->get_non_conference_teams($id);
+    	$data['schedule'] = $this->schedule_game->game_for_division($id);
+    	$this->load->view('about_division', $data);
+    } 
+	/**
+	 * returm divisions list
+     * @param 
+     * @return array
+	*/
+	function return_names_list(){
+		$divisions = $this->division->names_list();
+		echo json_encode($divisions);
+	}
 }

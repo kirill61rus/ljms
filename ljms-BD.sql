@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Мар 01 2014 г., 13:25
+-- Время создания: Мар 18 2014 г., 23:03
 -- Версия сервера: 5.6.16
 -- Версия PHP: 5.5.9
 
@@ -47,17 +47,57 @@ CREATE TABLE IF NOT EXISTS `divisions` (
 --
 
 INSERT INTO `divisions` (`id`, `name`, `status`, `fall_ball`, `age_from`, `age_to`, `description`, `rules`, `base_fee`, `addon_fee`, `logo`) VALUES
-(1, '1', 0, 0, 5, 5, '', '', 0, 0, ''),
-(2, '2', 0, 0, 5, 10, '', '', 0, 0, ''),
-(3, '3', 0, 0, 5, 8, '', '', 0, 0, ''),
+(1, '1', 1, 0, 5, 8, '', '', 0, 0, ''),
+(2, '2', 1, 0, 5, 10, '', '', 0, 0, ''),
+(3, '3', 1, 0, 5, 8, '', '', 0, 0, ''),
 (4, '4', 0, 0, 5, 5, '', '', 0, 0, ''),
 (5, '5', 0, 0, 5, 5, '', '', 0, 0, ''),
-(6, '6', 0, 0, 5, 5, '', '', 0, 0, ''),
-(7, '7', 0, 0, 5, 5, '', '', 0, 0, ''),
-(8, '8', 0, 0, 5, 5, '', '', 0, 0, ''),
-(9, '9', 0, 0, 5, 5, '', '', 0, 0, ''),
-(10, '10', 0, 0, 5, 5, '', '', 0, 0, ''),
-(11, '<iNpUt type="text" />', 0, 0, 5, 8, '', '', 12, 21, '');
+(6, '6', 1, 0, 5, 5, '', '', 0, 0, ''),
+(7, '7', 1, 0, 5, 5, '', '', 0, 0, ''),
+(8, '8', 1, 0, 5, 5, '', '', 0, 0, ''),
+(9, '9', 1, 0, 5, 5, '', '', 0, 0, ''),
+(10, '10', 1, 0, 5, 5, '', '', 0, 0, ''),
+(11, '<iNpUt type="text" />', 0, 0, 5, 8, 'The <iNpUt type="text" /> Division shall be the next level of play after 12U. A semi travel competitive division, which competes with surrounding towns.The <iNpUt type="text" /> Division shall be the next level of play after 12U. A semi travel competitive division, which competes with surrounding towns.The <iNpUt type="text" /> Division shall be the next level of play after 12U. A semi travel competitive division, which competes with surrounding towns.', 'ASA and SWS League - click here ASA and SWS League - click here ASA and SWS League - click here ASA and SWS League - click here ASA and SWS League - click here ASA and SWS League - click here ASA and SWS League - click here ASA and SWS League - click here ASA and SWS League - click here ASA and SWS League - click here ASA and SWS League - click here ASA and SWS League - click here ', 12, 21, '');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `game_schedule`
+--
+
+CREATE TABLE IF NOT EXISTS `game_schedule` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `time` time NOT NULL,
+  `division_id` int(11) NOT NULL,
+  `home_team_id` int(11) NOT NULL,
+  `visitor_team_id` int(11) NOT NULL,
+  `practice` tinyint(1) NOT NULL,
+  `location_id` int(11) NOT NULL,
+  `home_team_result` int(11) NOT NULL,
+  `visitor_team_result` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `division_id` (`division_id`),
+  KEY `home_team_id` (`home_team_id`),
+  KEY `visitor_team_id` (`visitor_team_id`),
+  KEY `location_id` (`location_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `game_schedule`
+--
+
+INSERT INTO `game_schedule` (`id`, `date`, `time`, `division_id`, `home_team_id`, `visitor_team_id`, `practice`, `location_id`, `home_team_result`, `visitor_team_result`, `status`) VALUES
+(3, '2014-03-19', '22:22:00', 4, 3, 8, 1, 11, 9, 0, 1),
+(4, '2014-03-26', '23:10:00', 4, 3, 8, 1, 15, 5, 3, 1),
+(5, '2014-03-12', '11:25:00', 6, 4, 4, 0, 11, 0, 0, 0),
+(6, '2014-03-12', '11:15:00', 5, 9, 9, 0, 16, 0, 0, 0),
+(7, '2014-03-25', '22:17:00', 8, 10, 10, 1, 15, 0, 0, 0),
+(8, '2014-03-11', '03:24:00', 7, 1, 1, 1, 12, 0, 0, 0),
+(9, '2014-03-26', '21:13:00', 5, 9, 9, 1, 14, 0, 0, 0),
+(10, '2014-04-17', '12:36:00', 6, 4, 4, 0, 8, 0, 0, 0),
+(11, '2014-12-18', '23:36:00', 4, 3, 8, 0, 10, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -78,6 +118,46 @@ CREATE TABLE IF NOT EXISTS `leagues` (
 INSERT INTO `leagues` (`id`, `name`) VALUES
 (1, 'LJMS Teams'),
 (2, 'Non conference Teams');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `location`
+--
+
+CREATE TABLE IF NOT EXISTS `location` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` char(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `location`
+--
+
+INSERT INTO `location` (`id`, `name`) VALUES
+(1, 'Beau Bien Park'),
+(2, 'Bolingbrook Fury'),
+(3, 'Butler School'),
+(4, 'Central Park #1'),
+(5, 'Central Park #2'),
+(6, 'Community Park - C5'),
+(7, 'Crossroads - West'),
+(8, 'Doerhoefer Park - SW'),
+(9, 'Frontier South Field#5'),
+(10, 'Hassert Park Blue'),
+(11, 'Jackson Creek East'),
+(12, 'Knoch Park Field #2'),
+(13, 'LTHS Freshman Field'),
+(14, 'McCollum Park #1'),
+(15, 'Mokena, Heritage'),
+(16, 'OHS Field #1'),
+(17, 'Plainfield'),
+(18, 'Powers Park - SW'),
+(19, 'Raintree Field'),
+(20, 'Tate Woods Park'),
+(21, 'Volunteer Park #3'),
+(22, 'Washington Park');
 
 -- --------------------------------------------------------
 
@@ -163,7 +243,6 @@ INSERT INTO `roles_to_users` (`id`, `user_id`, `role_id`, `division_id`, `team_i
 (26, 32, 1, 0, 0),
 (27, 32, 3, 6, 4),
 (28, 10, 3, 4, 3),
-(29, 10, 3, 4, 8),
 (30, 36, 1, 0, 0),
 (31, 35, 1, 0, 0),
 (32, 35, 2, 8, 0),
@@ -175,7 +254,13 @@ INSERT INTO `roles_to_users` (`id`, `user_id`, `role_id`, `division_id`, `team_i
 (38, 35, 4, 4, 3),
 (39, 35, 3, 1, 7),
 (40, 16, 3, 5, 9),
-(41, 17, 3, 8, 10);
+(41, 17, 3, 8, 10),
+(42, 10, 1, 0, 0),
+(43, 10, 2, 6, 0),
+(44, 37, 1, 0, 0),
+(45, 37, 5, 0, 0),
+(48, 10, 3, 11, 12),
+(49, 10, 4, 11, 12);
 
 -- --------------------------------------------------------
 
@@ -283,14 +368,15 @@ CREATE TABLE IF NOT EXISTS `teams` (
 --
 
 INSERT INTO `teams` (`id`, `name`, `division_id`, `league_type_id`, `status`, `is_visitor`) VALUES
-(1, '1', 7, 1, 1, 1),
-(3, '3', 4, 2, 1, 0),
+(1, '1', 7, 1, 0, 1),
+(3, 'команда', 4, 2, 1, 0),
 (4, '7', 6, 1, 1, 1),
 (7, '6', 1, 1, 1, 0),
-(8, '2', 4, 1, 1, 0),
+(8, 'team best', 4, 1, 1, 0),
 (9, '4', 5, 1, 0, 0),
-(10, '5', 8, 1, 0, 0),
-(11, '<iNpUt type="text" />', 1, 1, 1, 0);
+(10, 'уууеее', 8, 1, 0, 0),
+(11, '<iNpUt type="text" />team', 1, 1, 1, 0),
+(12, 'для пробы', 11, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -342,7 +428,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `address`, `city`, `state_id`, `zipcode`, `email`, `home_phone`, `cell_phone`, `alt_phone`, `password`, `alt_first_name`, `alt_last_name`, `alt_email`, `alt_phone_2`, `status`) VALUES
 (3, 'kirill', 'star', 'petr', 'tag', 1, 111111, 'kirill@kirill.com', '123', '123', '122', '', 'alt_first_name', 'alt_last_name', 'alt_email', 'alt_phone_2', 1),
 (4, 'второй', 'пользователь', 'rnd', 'ros', 3, 109, 'fgrrrsdf@dsgas.dg', '5252353252', '22241241', '2221241241', '111111', '11', '11', '11', '1111', 1),
-(10, 'gdsags', 'dgagasdgas', 'gdsags', 'gdsags', 10, 123141, 'fgasdf@dsgas.dg', '1413514551', '', '', 'd25e5308c3b59561719a3f5d82567648', '', '0', '', '0', 1),
+(10, 'gdsags', 'dgagasdgas', 'gdsags', 'gdsags', 10, 123141, 'fgasdf@dsgas.dg', '1413514551', '', '', 'd25e5308c3b59561719a3f5d82567648', '', 'dgsdsdgs', '', '', 0),
 (15, 'второй', 'второй', 'nonono', 'no', 7, 13323322, 'kkkirill@kirill.com', '12312414', '', '', '96e79218965eb72c92a549dd5a330112', 'totototo', '', '', '', 1),
 (16, 'fgasdf@dsgas.dg', 'fgasdf@dsgas.dg', 'fgasdf@dsgas.dg', 'fgasdf@dsgas.dg', 7, 32352, 'dfgasdf@dsgas.dg', '5321521523', '', '', 'd25e5308c3b59561719a3f5d82567648', '', '0', '', '', 1),
 (17, 'fgasdfg', 'fgasdf', 'fgasdf', 'fgasd', 5, 34563, 'fgassdf@dsgas.dg', '325125312', '', '', 'b508a724fae00d7eaaf01934809a011e', '', '0', '', '', 1),
@@ -355,7 +441,8 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `address`, `city`, `state_
 (32, 'First', 'Last', '', '', 4, 0, '', '', '', '', '', '', '0', '', '', 1),
 (34, 'kkirill@kirill.com', 'kkirill@kirill.com', 'kkirill@kirill.com', 'kkirill@kirill.com', 3, 1, 'k1irill@kirill.com', '11111111', '', '', 'ecc805eb4ed4b15ca0459e23e1872d9f', '', '', '', '', 1),
 (35, '<iNpUt type="text" />', '<iNpUt type="text" />', '<iNpUt type="text" />', '<iNpUt type="text" />', 2, 1, 'dg.sd@sfg.yu', '89094356440', '4523523', '', 'dg.sd@sfg.yu', '\\\\ "test" /?.&amp;&*@#$%^*;~`<iNpUt type="text" />фыва.&%\\ ''<b>t_e_st</b>''', '\\\\ "test" /?.&amp;&*@#$%^*;~`<iNpUt type="text" />фыва.&%\\ ''<b>t_e_st</b>''', '', '', 1),
-(36, '1', '1', '1', '1', 3, 1, 'sdg@sdg.ri', '111111111111', '11111111111', '', '5095f5ac9780f552085a5dc06bd5ee48', '', '', '', '', 1);
+(36, '1', '1', '1', '1', 3, 1, 'sdg@sdg.ri', '111111111111', '11111111111', '', '5095f5ac9780f552085a5dc06bd5ee48', '', '', '', '', 1),
+(37, 'user', 'user', 'adress', 'city', 6, 21, 'sdfasd@fgb.ff', '3214124', '', '', '4f5a5a047bac53e630b352cb12fd85f5', '', '', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -405,6 +492,15 @@ INSERT INTO `wear_types` (`id`, `name`) VALUES
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
+
+--
+-- Ограничения внешнего ключа таблицы `game_schedule`
+--
+ALTER TABLE `game_schedule`
+  ADD CONSTRAINT `game_schedule_ibfk_1` FOREIGN KEY (`division_id`) REFERENCES `divisions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `game_schedule_ibfk_2` FOREIGN KEY (`home_team_id`) REFERENCES `teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `game_schedule_ibfk_3` FOREIGN KEY (`visitor_team_id`) REFERENCES `teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `game_schedule_ibfk_4` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `players`

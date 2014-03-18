@@ -83,7 +83,7 @@
 	</thead>
 	<tbody>
 		<?php foreach($teams as $item) :?>
-			<tr>
+			<tr <?php if ($item['status'] == 0) echo 'class="inactive"'; ?>>
 				<td class ="checkbox_col"><input data-item-id="<?php echo ($item['id']);?>" class="check_one" type="checkbox"></td>
 				<td  class="team_col"><p><?php echo htmlspecialchars($item['team_name']);?></p></td>
 				<td class="divis_col"><p><?php echo htmlspecialchars($item['division_name']);?></p></td>

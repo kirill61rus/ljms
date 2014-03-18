@@ -26,6 +26,7 @@ class Division extends CI_Model {
 				 ->select('users.last_name as user_surname')
 				 ->select('GROUP_CONCAT(teams.name SEPARATOR "|||") as team_name', false)
 				 ->select('fall_ball')
+				 ->select('divisions.status')
 				 ->select('divisions.id')
 				 ->select('divisions.name as division_name')
 			     ->group_by('divisions.id');
@@ -34,6 +35,20 @@ class Division extends CI_Model {
 
 		return $this->db->get('divisions', $num, $offset)
 			     ->result_array();
+	}
+	function all_about($id) {
+		$this->db->join('roles_to_users', 'roles_to_users.division_id = divisions.id AND roles_to_users.role_id = 2', 'left')
+				 ->join('users', 'users.id = roles_to_users.user_id', 'left')
+ 				 ->select('users.first_name as user_name')
+				 ->select('users.last_name as user_surname')
+				 ->select('users.email')
+				 ->select('users.home_phone')
+				 ->select('divisions.name as division_name')
+				 ->select('divisions.description')
+				 ->select('divisions.rules')
+				 ->where('divisions.id', $id);
+	 	return $this->db->get('divisions')
+			     		->result_array();
 	}
 
 	function division_filter($filter) {
@@ -80,4 +95,5 @@ class Division extends CI_Model {
 		$this->db->where('id', $id);
 		return $this->db->get('divisions')->result_array();
 	}
+
 }

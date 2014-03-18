@@ -40,6 +40,9 @@ label {
 label.error{
 	color: red;
 }
+.full_width_table tbody .inactive p{
+	color: #999;
+}
 .text_center {
 	text-align: center;
 }
@@ -143,13 +146,27 @@ label.error{
 #base .content {
 	padding: 10px 20px;
 }
+.division_info {
+	padding-top: 20px;
+}
+.division_info h5 {
+	font-family: Arial, Tahoma, Helvetica;
+	font-size: 12px;
+	font-weight: bold;
+	color: #8d000b;
+	padding: 0px 0px 10px 10px;
+}
+.division_info p {
+	padding: 0px 0px 10px 10px;
+	text-align: justify;
+}
 #content {
 	background: #FFF;
 }
 .content {
 	min-height: 500px;
 }
-#content:after, .title:after, #base .content:after, .form-group:after, .add_form, .division_list, .total_rows, .action_select, .result_form {
+#content:after, .title:after, #base .content:after, .form-group:after, .add_form, .division_list, .total_rows, .action_select, .result_form, .third_width_col:after {
 	clear: both;
 	content: "";
 	display: table;
@@ -351,6 +368,26 @@ label.error{
 .hilf_width_col {
 	width: 50%;
 	float: left;
+}
+.third_width_col {
+	width: 35%;
+	float: left;
+	font-size: 12px;
+}
+.third_width_col .full_width_table.schedule_for_date {
+	width: 95%;
+	margin-top: 5px;
+}
+.two_thirds {
+	width: 70%;
+	float: left;
+	font-size: 12px;
+}
+.division_info .full_width_table {
+	width: 98%;
+}
+.division_info .full_width_table p{
+	text-align: center;
 }
 .form-group label:first-child{
 		padding: 5px 0 10px 80px;

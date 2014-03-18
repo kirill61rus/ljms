@@ -24,6 +24,7 @@ class Schedule_game extends CI_Model {
 				 ->select('home_teams.name as home_team_name')
 				 ->select('visitor_teams.name as visitor_team_name')
 				 ->select('divisions.name as division_name')
+				 ->select('game_schedule.status')
 				 ->select('game_schedule.date')
 				 ->select('game_schedule.id')
 				 ->select('game_schedule.home_team_result')
@@ -80,6 +81,32 @@ class Schedule_game extends CI_Model {
 		return $this->db->get('game_schedule')
 						->result_array();
 	}
+
+	function game_for_division($id) {	
+		$this->db->join('divisions', 'game_schedule.division_id = divisions.id', 'left')
+				 ->join('teams as home_teams', 'game_schedule.home_team_id = home_teams.id', 'left')
+				 ->join('teams as visitor_teams', 'game_schedule.visitor_team_id = visitor_teams.id', 'left')
+				 ->join('location', 'game_schedule.location_id = location.id', 'left')
+				 ->select('home_teams.name as home_team_name')
+				 ->select('visitor_teams.name as visitor_team_name')
+				 ->select('divisions.name as division_name')
+				 ->select('game_schedule.date')
+				 ->select('game_schedule.id')
+				 ->select('game_schedule.home_team_result')
+				 ->select('game_schedule.visitor_team_result')
+				 ->select('game_schedule.practice')
+				 ->select('game_schedule.time')
+				 ->select('location.name as location_name')
+				 ->group_by('game_schedule.id');
+
+		$this->db->where('game_schedule.division_id', $id);
+
+		return $this->db->get('game_schedule')
+						->result_array();
+	}
+
+
+
 
 	function teams_by_id_game($id) {
 		$this->db->join('teams as home_teams', 'game_schedule.home_team_id = home_teams.id', 'left')
