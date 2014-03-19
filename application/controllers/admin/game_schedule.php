@@ -154,7 +154,7 @@ class Game_schedule extends CI_Controller {
 
 	/**
 	 * performs mass action
-     * @param Post this the action and selected user id
+     * @param Post this the action and selected game id
      * @return ...
 	*/
 	function action(){
@@ -209,8 +209,8 @@ class Game_schedule extends CI_Controller {
 
 	/**
 	 * generates an array of data to write to the database
-     * @param Post this user data
-     * @return array this user data
+     * @param Post this game data
+     * @return array this game data
 	*/
 	private function process_game_data() {
 		$fields_names = ['practice', 'date', 'time', 'division_id', 'home_team_id', 'visitor_team_id', 'location_id'];
@@ -221,12 +221,10 @@ class Game_schedule extends CI_Controller {
 	}
 
 	/**
-     * checks for a email in the database,
-     * @param string $email
-     * @return TRUE or FALSE and info  email is busy
+     * check date for validate
+     * @param string this date
+     * @return TRUE or FALSE 
      */
-
-
 	function date_check($str) {
 		$date = DateTime::createFromFormat('m/d/Y', $str);
 		$timestamp = strtotime($date->format('d-m-Y'));
@@ -239,8 +237,8 @@ class Game_schedule extends CI_Controller {
 	}
 
 	/**
-     * check phone for validate
-     * @param string 
+     * check time for validate
+     * @param string this time 
      * @return TRUE or FALSE
      */
 	function time_check($str) {

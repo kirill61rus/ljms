@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Мар 18 2014 г., 23:03
+-- Время создания: Мар 19 2014 г., 16:56
 -- Версия сервера: 5.6.16
 -- Версия PHP: 5.5.9
 
@@ -260,7 +260,8 @@ INSERT INTO `roles_to_users` (`id`, `user_id`, `role_id`, `division_id`, `team_i
 (44, 37, 1, 0, 0),
 (45, 37, 5, 0, 0),
 (48, 10, 3, 11, 12),
-(49, 10, 4, 11, 12);
+(49, 10, 4, 11, 12),
+(50, 4, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -426,8 +427,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `address`, `city`, `state_id`, `zipcode`, `email`, `home_phone`, `cell_phone`, `alt_phone`, `password`, `alt_first_name`, `alt_last_name`, `alt_email`, `alt_phone_2`, `status`) VALUES
-(3, 'kirill', 'star', 'petr', 'tag', 1, 111111, 'kirill@kirill.com', '123', '123', '122', '', 'alt_first_name', 'alt_last_name', 'alt_email', 'alt_phone_2', 1),
-(4, 'второй', 'пользователь', 'rnd', 'ros', 3, 109, 'fgrrrsdf@dsgas.dg', '5252353252', '22241241', '2221241241', '111111', '11', '11', '11', '1111', 1),
+(3, 'kirill', 'star', 'petr', 'tag', 1, 111111, 'kirill@kirill.com', '35234421', '421124354321', '41245231451', '', 'alt_first_name', 'alt_last_name', 'First@fas.sd', '5489543516', 1),
+(4, 'второй', 'пользователь', 'rnd', 'ros', 3, 109, 'fgrrrsdf@dsgas.dg', '5252353252', '22241241', '2221241241', '111111', 'first', 'last', 'fdgrrrsdf@dsgas.dg', '5546465489', 1),
 (10, 'gdsags', 'dgagasdgas', 'gdsags', 'gdsags', 10, 123141, 'fgasdf@dsgas.dg', '1413514551', '', '', 'd25e5308c3b59561719a3f5d82567648', '', 'dgsdsdgs', '', '', 0),
 (15, 'второй', 'второй', 'nonono', 'no', 7, 13323322, 'kkkirill@kirill.com', '12312414', '', '', '96e79218965eb72c92a549dd5a330112', 'totototo', '', '', '', 1),
 (16, 'fgasdf@dsgas.dg', 'fgasdf@dsgas.dg', 'fgasdf@dsgas.dg', 'fgasdf@dsgas.dg', 7, 32352, 'dfgasdf@dsgas.dg', '5321521523', '', '', 'd25e5308c3b59561719a3f5d82567648', '', '0', '', '', 1),
@@ -438,7 +439,7 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `address`, `city`, `state_
 (25, 'name', 'family', 'dfgsdfa', 'dsgagfasd', 4, 3241, 'fgrassdf@dsgas.dg', '15132452313', '', '', 'b508a724fae00d7eaaf01934809a011e', '', '0', '', '', 1),
 (27, 'проверка', 'проверка', 'проверка', 'проверка', 6, 0, 'dsfs@sfdsa.fs', '124141341', '', '', '', '', '0', '', '', 1),
 (28, '32523523', '235123521', 'gdsga', 'agfsagfa', 11, 3232, 'fgtassdf@dsgas.dg', '1245123412', '', '', 'b508a724fae00d7eaaf01934809a011e', '', '0', '', '', 1),
-(32, 'First', 'Last', '', '', 4, 0, '', '', '', '', '', '', '0', '', '', 1),
+(32, 'First', 'Last', 'alasdd', 'tikol', 4, 51465, 'rtwer@dsfsa.re', '456846465', '', '', '96e79218965eb72c92a549dd5a330112', '', '0', '', '', 1),
 (34, 'kkirill@kirill.com', 'kkirill@kirill.com', 'kkirill@kirill.com', 'kkirill@kirill.com', 3, 1, 'k1irill@kirill.com', '11111111', '', '', 'ecc805eb4ed4b15ca0459e23e1872d9f', '', '', '', '', 1),
 (35, '<iNpUt type="text" />', '<iNpUt type="text" />', '<iNpUt type="text" />', '<iNpUt type="text" />', 2, 1, 'dg.sd@sfg.yu', '89094356440', '4523523', '', 'dg.sd@sfg.yu', '\\\\ "test" /?.&amp;&*@#$%^*;~`<iNpUt type="text" />фыва.&%\\ ''<b>t_e_st</b>''', '\\\\ "test" /?.&amp;&*@#$%^*;~`<iNpUt type="text" />фыва.&%\\ ''<b>t_e_st</b>''', '', '', 1),
 (36, '1', '1', '1', '1', 3, 1, 'sdg@sdg.ri', '111111111111', '11111111111', '', '5095f5ac9780f552085a5dc06bd5ee48', '', '', '', '', 1),

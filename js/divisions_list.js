@@ -1,5 +1,5 @@
 $(document).ready(function() {
-        
+    //fills dd divisions from the database    
     $.post(base_url+'calendar/return_names_list', function(divisions){
 
         if (divisions){
@@ -17,10 +17,7 @@ $(document).ready(function() {
             }     
         }        
     });
-
-
-
-
+    //reference when choosing a division
     $( "#division_list_schedule" ).change(function() {
         var division_id = $(this).val();
 

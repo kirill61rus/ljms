@@ -228,6 +228,23 @@ class System_users extends CI_Controller {
 		$this->load->view('admin/edit_user', $data);
 	}
 
+
+
+	/**
+	 * verify the existence of the role
+     * @param Post this role info
+     * @return true if role exists
+	*/
+	function role_check(){
+		$data_role['role_id'] = $this->input->post('role_id');
+		$data_role['division_id'] = $this->input->post('div_id');
+		$data_role['team_id'] = $this->input->post('team_id');
+		$data_role['user_id'] = $this->input->post('user_id');
+		if (count($this->roles->check_existence_role($data_role))){
+			echo 'TRUE';
+		} 
+	}
+
 	/**
 	 * fetches teams relating to the division
      * @param Post this division id

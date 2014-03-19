@@ -1,5 +1,8 @@
 <?php $this->load->view('admin/include/header')?>
 <?php $this->load->view('admin/include/admin_menu')?>
+		<script type="text/javascript">
+       		var user_id = '<?php echo $this->input->get("id");  ?>';
+    	</script>
 <h2 class="title_admin">Edit System User</h2>
     <?php $this->flash->show(); 
 		if (validation_errors()){ echo '<div class="alert-error">'.validation_errors().'</div>';}

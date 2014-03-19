@@ -1,6 +1,9 @@
 <?php $this->load->view('admin/include/header')?>
 <?php $this->load->view('admin/include/admin_menu')?>
 <h2 class="title_admin">Add System User</h2>
+	<script type="text/javascript">
+   		var user_id = '';
+	</script>
 	<?php 
 		if (validation_errors()){ echo '<div class="alert-error">'.validation_errors().'</div>';}
 		$attributes = array('id' => 'add_user', 'autocomplete' => "off");

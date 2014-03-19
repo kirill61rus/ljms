@@ -77,29 +77,44 @@ $(document).ready(function() {
 
         template_data.team_id   = $('.teams_dd').val();
         template_data.team_name = $('.teams_dd option:selected').html();
-
+        //if dd team not selected
         if ($(".teams_dd").prop("disabled")){
             template_data.team_name = ''; 
             template_data.team_id   = '';
         }
+        //if dd division not selected
         if ($(".divisions_dd").prop("disabled")){
             template_data.division_name = ''; 
             template_data.division_id   = '';
         }
-
+        //fields for the template
         template_data.role_input = '<input type="hidden" value="'+template_data.role_id+'" name="role[]">';
         template_data.div_input  = '<input type="hidden" value="'+template_data.division_id+'" name="div[]">';
         template_data.team_input = '<input type="hidden" value="'+ template_data.team_id+'" name="team[]">';
 
-        template_data.role_to_user_id = '';
+        //verify the existence of the role
+        $.post(base_url+'admin/system_users/role_check', {
+            div_id:  template_data.division_id,
+            role_id: template_data.role_id, 
+            team_id: template_data.team_id,
+            user_id: user_id,
 
-        for(var placeholder_name in template_data) {
-            role_row_template = role_row_template.replace('{' + placeholder_name + '}', template_data[placeholder_name]);
-        }
+             }, function(roles){
+                //if role exists
+                if (roles=="TRUE") {
+                    alert("Role already exists")
+                // add if the role free
+                } else {
+                    template_data.role_to_user_id = '';
 
-        $(role_row_template).appendTo($("thead + tbody"));
+                    for(var placeholder_name in template_data) {
+                        role_row_template = role_row_template.replace('{' + placeholder_name + '}', template_data[placeholder_name]);
+                    }
+                    $(role_row_template).appendTo($("thead + tbody"));
+                }
+        });
     }); 
-
+    //delete role from db
     $(document).on("click", "a[href='#delete_role']", function(e){
         e.preventDefault();
         if(confirm('Are you sure want to delete this role?')){

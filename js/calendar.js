@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+//request to the server about games for the selected month and year
     function requestData (month, year){
             $.ajax({
                     async: false,
@@ -10,12 +10,12 @@ $(document).ready(function() {
                     success: function (msg){ undisabledDays=msg; }
             });
     }
-//Функция отключеня дней без статей, на календаре,
+//off days without games
     function disableAllTheseDays(date) {
             var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
             return [$.inArray(string, undisabledDays) !=-1];
       }
-//Функция загрузки дат новостей для текущего месяца   
+//determines the year and month currently
     function loadCurrentPosts() {
         var curDate = new Date();
         var month = curDate.getMonth();
@@ -23,20 +23,16 @@ $(document).ready(function() {
         var year = curDate.getFullYear();
             requestData(month, year);
     }
-//Функция загрузки дат новостей при переходе на следующий,
+//year and month when scrolling calendar
     function loadIdPost(year, month){ requestData(month, year); }     
            
     $('#datepickerevent').datepicker({
-    //перед загрузкой календаря получаем даты новостей для
         beforeShow: loadCurrentPosts(),
-    //выставляем удобный формат даты календаря, для передачи на сервер
         dateFormat: 'yy-mm-dd',
-    //перед показом даты проверяем есть новости к дате или нет, 
         beforeShowDay:  disableAllTheseDays, 
-    //при изменении месяца получаем даты новостей для него
         onChangeMonthYear:  function(year, month, inst) {
                                     loadIdPost(year, month)},
-    //при выборе даты, в данном случае открываем страницу
+    //reference when choosing a date
         onSelect: function(date)
                         {
                         var links="calendar?dates=";
