@@ -23,8 +23,10 @@ class Team extends CI_Model {
 		$this->db->join('divisions', 'divisions.id = teams.division_id', 'left')
 				 ->join('roles_to_users', 'roles_to_users.team_id = teams.id AND roles_to_users.role_id = 3', 'left')
 				 ->join('users', 'users.id = roles_to_users.user_id', 'left')
-				 ->join('leagues', 'leagues.id = teams.league_type_id', 'left')
-				 ->select('users.first_name as user_name')
+				 ->join('leagues', 'leagues.id = teams.league_type_id', 'left');
+		$this->game_results();				 
+
+		$this->db->select('users.first_name as user_name')
 				 ->select('users.last_name as user_surname')
 				 ->select('teams.id')
 				 ->select('teams.status')
@@ -32,6 +34,7 @@ class Team extends CI_Model {
 				 ->select('divisions.name as division_name')
 				 ->select('leagues.name as league_name')
 				 ->order_by('teams.name')
+				 ->group_by('teams.id')
 				 ->select('teams.status');
 
 		$this->team_filter($filter);
@@ -52,16 +55,20 @@ class Team extends CI_Model {
 		}
 	}
 	function get_ljms_team($id) {
-		$where = "division_id = $id AND league_type_id = 1";
-		$this->db->where($where)
-				 ->select('name');
+		$this->game_results();
+		$where = "teams.division_id = $id AND teams.league_type_id = 1";		
+		$this->db->where($where);
+		$this->db->group_by('teams.id');		
+		$this->db->select('teams.name');
 		return $this->db->get('teams')
 			    		->result_array();
 	}
 	function get_non_conference_teams($id) {
-				$where = "division_id = $id AND league_type_id = 2";
-		$this->db->where($where)
-				 ->select('name');
+		$this->game_results();
+		$where = "teams.division_id = $id AND teams.league_type_id = 2";		
+		$this->db->where($where);
+		$this->db->group_by('teams.id');		
+		$this->db->select('teams.name');
 		return $this->db->get('teams')
 			    		->result_array();
 	}
@@ -91,5 +98,23 @@ class Team extends CI_Model {
 	function team_data($id) {
 		$this->db->where('id', $id);
 		return $this->db->get('teams')->result_array();
+	}
+
+	function game_results(){
+	$this->db->join('game_schedule as home_win', 'home_win.home_team_id = teams.id AND home_win.home_team_result > home_win.visitor_team_result', 'left')
+			 ->join('game_schedule as visitor_win', 'visitor_win.visitor_team_id = teams.id AND visitor_win.visitor_team_result > visitor_win.home_team_result', 'left')
+
+			 ->join('game_schedule as home_loss', 'home_loss.home_team_id = teams.id AND home_loss.home_team_result < home_loss.visitor_team_result', 'left')
+			 ->join('game_schedule as visitor_loss', 'visitor_loss.visitor_team_id = teams.id AND visitor_loss.visitor_team_result < visitor_loss.home_team_result', 'left')
+
+			 ->join('game_schedule as home_ties', 'home_ties.home_team_id = teams.id AND home_ties.home_team_result = home_ties.visitor_team_result', 'left')
+			 ->join('game_schedule as visitor_ties', 'visitor_ties.visitor_team_id = teams.id AND visitor_ties.visitor_team_result = visitor_ties.home_team_result', 'left')
+
+			 ->select('GROUP_CONCAT(DISTINCT(home_win.id)) as home_win', false)
+			 ->select('GROUP_CONCAT(DISTINCT(visitor_win.id)) as visitor_win', false)
+			 ->select('GROUP_CONCAT(DISTINCT(home_loss.id)) as home_loss', false)
+			 ->select('GROUP_CONCAT(DISTINCT(visitor_loss.id)) as visitor_loss', false)
+			 ->select('GROUP_CONCAT(DISTINCT(home_ties.id)) as home_ties', false)
+			 ->select('GROUP_CONCAT(DISTINCT(visitor_ties.id)) as visitor_ties', false);
 	}
 }

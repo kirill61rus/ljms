@@ -62,6 +62,31 @@ class Teams extends CI_Controller {
 		$data['limit'] = $limit;
 		//add to array filter information
 		$data['filter_data'] = $filter_data;
+		//print_r($data['teams'][0]['home_win']);
+		$result_names = ['home_win', 'visitor_win', 'home_loss', 'visitor_loss', 'home_ties', 'visitor_ties'];
+		//iterate teams
+		foreach ($data['teams'] as $key => $value) {
+			//iterate through all the possible outcomes
+			foreach($result_names as $result_name) {
+				if ($str = $data['teams'][$key][$result_name]) {
+					$count = substr_count( $str, "," )+1;
+					$data['teams'][$key][$result_name]= $count;
+				}
+			}
+			//summation results
+			$data['teams'][$key]['wins'] = $data['teams'][$key]['home_win']+$data['teams'][$key]['visitor_win'];
+			$data['teams'][$key]['loses'] = $data['teams'][$key]['home_loss']+$data['teams'][$key]['visitor_loss'];
+			$data['teams'][$key]['ties'] = $data['teams'][$key]['home_ties']+$data['teams'][$key]['visitor_ties'];
+
+			//counting the number of wins as a percentage
+			$number_of_games = $data['teams'][$key]['wins']+$data['teams'][$key]['loses']+$data['teams'][$key]['ties'];
+			if ($number_of_games) {
+				$data['teams'][$key]['average'] = round(100/($number_of_games)*$data['teams'][$key]['wins']);
+			} else {
+				$data['teams'][$key]['average'] = 0;
+			}	
+		}
+
 		$this->load->view('admin/teams', $data);
 	}
 	/**

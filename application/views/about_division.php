@@ -11,7 +11,7 @@
 		</div>
 		<div class="third_width_col">
 			<h5>LJMS Teams</h5>
-			<?php if ($ljms_team) {?>
+			<?php if (!empty($ljms_team)) {?>
 			<table class="full_width_table schedule_for_date">
 				<thead>
 					<tr>
@@ -26,10 +26,10 @@
 					<?php foreach($ljms_team as $item) :?>
 						<tr>
 							<td><p><?php echo htmlspecialchars($item['name']);?></p></td>
-							<td><p><?php ?></p></td>
-							<td><p><?php ?></p></td>
-							<td><p><?php ?></p></td>
-							<td><p><?php ?></p></td>
+							<td><p><?php echo $item['wins'] ?></p></td>
+							<td><p><?php echo $item['loses'] ?></p></td>
+							<td><p><?php echo $item['ties'] ?></p></td>
+							<td><p><?php echo $item['average'].'%' ?></p></td>
 						</tr> 
 					<?php endforeach;?>
 				</tbody>
@@ -57,7 +57,7 @@
 		</div>
 		<div class="third_width_col">
 			<h5>Non Conference Teams</h5>
-			<?php if ($non_conference_team) {?>
+			<?php if (!empty($non_conference_team)){?>
 			<table class="full_width_table schedule_for_date">
 				<thead>
 					<tr>
@@ -72,10 +72,10 @@
 					<?php foreach($non_conference_team as $item) :?>
 						<tr>
 							<td><p><?php echo htmlspecialchars($item['name']);?></p></td>
-							<td><p><?php ?></p></td>
-							<td><p><?php ?></p></td>
-							<td><p><?php ?></p></td>
-							<td><p><?php ?></p></td>
+							<td><p><?php echo $item['wins'] ?></p></td>
+							<td><p><?php echo $item['loses'] ?></p></td>
+							<td><p><?php echo $item['ties'] ?></p></td>
+							<td><p><?php echo $item['average'].'%' ?></p></td>
 						</tr> 
 					<?php endforeach;?>
 				</tbody>
@@ -85,7 +85,7 @@
 
 		<div class="two_thirds">
 		<h5>Game schedule</h5>
-		<?php if ($non_conference_team) {?>
+		<?php if ($schedule) {?>
 			<table class="full_width_table">
 				<thead>
 					<tr>
