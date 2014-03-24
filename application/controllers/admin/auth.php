@@ -37,7 +37,7 @@ class Auth extends CI_Controller {
 	}
 	function logout(){
 		$array_items = array('id' => '', 'role' => '', 'divisions' =>'');
-		$this->session->unset_userdata('id');
+		$this->session->unset_userdata($array_items);
 		redirect(base_url());
 	}
 }

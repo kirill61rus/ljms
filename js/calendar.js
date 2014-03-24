@@ -35,7 +35,7 @@ $(document).ready(function() {
     //reference when choosing a date
         onSelect: function(date)
                         {
-                        var links="calendar?dates=";
+                        var links= base_url+"calendar?dates=";
                         window.location.href = links+date;
                         }
           
