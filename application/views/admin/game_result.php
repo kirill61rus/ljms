@@ -1,5 +1,10 @@
-<?php $this->load->view('admin/include/header')?>
-<?php $this->load->view('admin/include/admin_menu')?>
+<?php $this->load->view('admin/include/header');
+if($this->has_acces->admin_function()) {
+	$this->load->view('admin/include/admin_menu');
+} else {
+	$this->load->view('admin/include/coach_menu');
+}
+?>
 <h2 class="title_indent text_center">Game Results</h2>
 	<?php 
 		if (validation_errors()){ echo '<div class="alert-error">'.validation_errors().'</div>';}

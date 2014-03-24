@@ -4,7 +4,7 @@ class Divisions extends CI_Controller {
 	public function __construct() {
         parent::__construct();
 		$this->load->model('admin/division'); 
-		if (!$this->session->userdata('id')) redirect(base_url('admin/auth'));
+		if ($this->session->userdata('role') != 'admin') redirect(base_url('admin/game_schedule'));
     }
 	/**
 	 * displays a table of divisions

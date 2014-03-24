@@ -24,6 +24,7 @@ class Schedule_game extends CI_Model {
 				 ->select('home_teams.name as home_team_name')
 				 ->select('visitor_teams.name as visitor_team_name')
 				 ->select('divisions.name as division_name')
+				 ->select('divisions.id as division_id')
 				 ->select('game_schedule.status')
 				 ->select('game_schedule.date')
 				 ->select('game_schedule.id')
@@ -140,5 +141,16 @@ class Schedule_game extends CI_Model {
 	function game_data($id) {
 		$this->db->where('id', $id);
 		return $this->db->get('game_schedule')->result_array();
+	}
+	function get_division_by_game_id($id) {
+		$this->db->select('division_id')
+				 ->where('id', $id);
+	 	return $this->db->get('game_schedule')->result_array();
+	}
+	function check_the_existence_of_the_game($id) {
+		$this->db->select('id')
+				 ->where('id', $id);
+		return $this->db->get('game_schedule')->result_array();
+
 	}
 }

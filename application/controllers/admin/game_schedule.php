@@ -9,6 +9,7 @@ class Game_schedule extends CI_Controller {
 		$this->load->model('admin/roles');
 		$this->load->model('admin/team');
 		$this->load->model('admin/additional_requests');
+		$this->load->library('has_acces');
 		$this->load->library('parser');
 		if (!$this->session->userdata('id')) redirect(base_url('admin/auth'));
     } 
@@ -78,6 +79,7 @@ class Game_schedule extends CI_Controller {
      * @return error or success
 	*/
 	function add(){
+		if ($this->session->userdata('role') != 'admin') redirect(base_url('admin/game_schedule'));
 		// if form is submitted
 		if ($data = $this->input->post()) {
 			// generates an array of data to write to the database
@@ -91,7 +93,7 @@ class Game_schedule extends CI_Controller {
 
 				$date = DateTime::createFromFormat('m/d/Y', $game_data['date']);
 				$game_data['date'] = $date->format('Y-m-d');
-
+				$game_data['status'] = 1;
 				//adding a game to the database and save id to variable
 				$data_game['game_id'] = $this->schedule_game->add($game_data);
 				//if the data is successfully added
@@ -113,6 +115,7 @@ class Game_schedule extends CI_Controller {
      * @return error or success
 	*/
 	function edit(){
+		if ($this->session->userdata('role') != 'admin') redirect(base_url('admin/game_schedule'));
 		// if form is submitted
 
 		if ($data_post = $this->input->post()) {
@@ -158,6 +161,7 @@ class Game_schedule extends CI_Controller {
      * @return ...
 	*/
 	function action(){
+		if ($this->session->userdata('role') != 'admin') redirect(base_url('admin/game_schedule'));
 		switch($this->input->post('action')){
 			case 'delete':
 				$this->schedule_game->delete($this->input->post('game_schedul_ids'));
@@ -184,27 +188,37 @@ class Game_schedule extends CI_Controller {
      * @return error or success
 	*/	
 	function results(){
-		// if form is submitted
-		if ($data_post = $this->input->post()) {
-			// generates an array of data
-			$result['home_team_result'] = $this->input->post('home_team_result');
-			$result['visitor_team_result'] = $this->input->post('visitor_team_result');
+		//check user rights to edit
+		$division_id = $this->schedule_game->get_division_by_game_id($this->input->get('id'));
+		$division_id = $division_id[0]['division_id'];
+		if (!$division_id) redirect(base_url('admin/game_schedule'));
+		
+		if($this->has_acces->ownership_divisions($division_id)) { 
+			// if form is submitted
+			if ($data_post = $this->input->post()) {
+				// generates an array of data
+				$result['home_team_result'] = $this->input->post('home_team_result');
+				$result['visitor_team_result'] = $this->input->post('visitor_team_result');
 
-			$this->load->library('form_validation');
-			$this->load->library('validation');
-			//check the validity of data
-			if($this->validation->result()) {
-				//if the data is successfully added
-				if ($this->schedule_game->edit($this->input->get('id'), $result)) {
-					$this->session->set_flashdata('success', 'Add results successfully');
-				} else {
-					$this->session->set_flashdata('error', 'Database error');
+				$this->load->library('form_validation');
+				$this->load->library('validation');
+				//check the validity of data
+				if($this->validation->result()) {
+					//if the data is successfully added
+					if ($this->schedule_game->edit($this->input->get('id'), $result)) {
+						$this->session->set_flashdata('success', 'Add results successfully');
+					} else {
+						$this->session->set_flashdata('error', 'Database error');
+					}
 				}
+				redirect(base_url('admin/game_schedule'));
 			}
+			$data['game_data'] = $this->schedule_game->teams_by_id_game($this->input->get('id'));
+			$this->load->view('admin/game_result', $data);
+		} else {
+			$this->session->set_flashdata('error', 'Access is denied');
 			redirect(base_url('admin/game_schedule'));
 		}
-		$data['game_data'] = $this->schedule_game->teams_by_id_game($this->input->get('id'));
-		$this->load->view('admin/game_result', $data);
 	}
 
 	/**

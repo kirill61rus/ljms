@@ -34,12 +34,25 @@ class System_user extends CI_Model {
 				 ->select('users.status')
 				 ->select('users.email')
 				 ->select('users.id')
-				 ->group_by('users.id');
+				 ->group_by('users.last_name');
 
 		$this->users_filter($filter);
 
 		return $this->db->get('users', $num, $offset)
 						->result_array();
+	}
+
+	function auth($email, $password){
+		$this->db->join('roles_to_users', 'roles_to_users.user_id = users.id', 'left');
+		$this->db->select('GROUP_CONCAT(roles_to_users.role_id) as roles', false);
+		$this->db->select('GROUP_CONCAT(roles_to_users.division_id) as divisions', false);
+		$this->db->select('users.id');
+   		$this->db->where('email', $email);
+   		$this->db->where('password', $password)
+   				 ->group_by('users.id');
+		$result = $this->db->get('users')->result_array();
+		
+		return (empty($result)) ? FALSE : $result;
 	}
 
 	function users_filter($filter) {

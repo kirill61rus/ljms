@@ -9,7 +9,7 @@ class System_users extends CI_Controller {
 		$this->load->model('admin/roles');
 		$this->load->model('admin/additional_requests');
 		$this->load->library('parser');
-		if (!$this->session->userdata('id')) redirect(base_url('admin/auth'));
+		if ($this->session->userdata('role') != 'admin') redirect(base_url('admin/game_schedule'));
     }
 
 	/**

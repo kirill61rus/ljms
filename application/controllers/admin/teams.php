@@ -6,7 +6,7 @@ class Teams extends CI_Controller {
         parent::__construct();
 		$this->load->model('admin/division'); 
 		$this->load->model('admin/team'); 
-		if (!$this->session->userdata('id')) redirect(base_url('admin/auth'));
+		if ($this->session->userdata('role') != 'admin') redirect(base_url('admin/game_schedule'));
     }
 
 	/**

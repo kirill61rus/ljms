@@ -96,7 +96,7 @@ label.error{
 	margin-right: 6px;
 	padding-left: 6px;
 }
-.menu li:first-child {
+#admin_navbar .menu li:first-child {
 	border-left: none;
 }
 .menu li a {

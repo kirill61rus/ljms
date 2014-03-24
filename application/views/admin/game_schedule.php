@@ -1,5 +1,5 @@
-<?php $this->load->view('admin/include/header')?>
-<?php $this->load->view('admin/include/admin_menu')?>
+<?php $this->load->view('admin/include/header');
+  if($this->has_acces->admin_function()) $this->load->view('admin/include/admin_menu')?>
 <div class="admin_menu_info">
 	<h2>Game schedule</h2>
     <?php $this->flash->show(); ?>
@@ -47,10 +47,12 @@
 		<input type="submit" class="button" value="Filter">
 	</form>
 </div>
-<?php echo form_close()?>
+<?php echo form_close();
+if($this->has_acces->admin_function()) {?>
 <div class="right_button">
 	<a class="button" href="<?=base_url('admin/game_schedule/add')?>">Add game</a>
 </div>
+<?php } ?>
 <div class="right_button pagination total_rows">
 	<a <?php if (!isset($_GET['limit']) || $_GET['limit'] == '10') {  echo 'class="active_limit"';} ?> href="<?=base_url('admin/game_schedule/?').$filter_data.'limit=10'?>">10</a>
 	<a <?php if (isset($_GET['limit']) && $_GET['limit'] == '20') {  echo 'class="active_limit"';} ?> href="<?=base_url('admin/game_schedule/?').$filter_data.'limit=20'?>">20</a>
@@ -58,6 +60,7 @@
 	<a <?php if (isset($_GET['limit']) && $_GET['limit'] == 'all') { echo 'class="active_limit"';} ?> href="<?=base_url('admin/game_schedule/?').$filter_data.'limit=all'?>">All</a>
 </div>
 	<?php 
+		if($this->has_acces->admin_function()) {
 		$attributes = array('id' => 'action_select');
 		echo form_open_multipart('admin/game_schedule/action', $attributes);
 	?>
@@ -73,6 +76,7 @@
 	?>
 	<input type="submit" class="inactiv" id = 'mass_action_button'onclick="return confirm('Are you sure?')" value="Action" disabled>
 </div>
+<?php }?>
 <?php echo form_close()?>
 <table class="full_width_table">
 	<thead>
@@ -100,8 +104,12 @@
 				<td><p><?php echo (($item['practice'])==1) ? 'YES': 'NO';?></p></td>
 				<td><p><?php echo htmlspecialchars($item['location_name'])?></p></td>
 				<td class="action_col">
-					<a class="button" href="<?=base_url('admin/game_schedule/results').'?'.'id='.($item['id'])?>">Results</a>
-					<a href="<?php echo base_url('admin/game_schedule/edit').'?'.'id='.($item['id'])?>" class="edit"><img src="<?=base_url('images/edit.png')?>"></a>
+					<?php if($this->has_acces->ownership_divisions($item['division_id'])) { ?>
+						<a class="button" href="<?=base_url('admin/game_schedule/results').'?'.'id='.($item['id'])?>">Results</a>
+					<?php }
+						if($this->has_acces->admin_function()) { ?>
+						<a href="<?php echo base_url('admin/game_schedule/edit').'?'.'id='.($item['id'])?>" class="edit"><img src="<?=base_url('images/edit.png')?>"></a>
+					<?php }?>
 			</tr> 
 		<?php endforeach;?>
 	</tbody>
